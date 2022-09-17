@@ -1,0 +1,104 @@
+<div class="container-full bg-dark d-flex">
+    <nav class="side-menu">
+        <app-menu></app-menu>
+    </nav>
+    <div class="container p-4 bg-light">
+        <div class="row">
+            <div style="cursor: pointer;"  (click)="reload()" class="col-auto d-flex p-4">
+                <fa-icon style='margin-right: 5px;' [icon]="faArrowLeft"></fa-icon>
+                <span class="">Voltar</span>
+            </div>
+        </div>
+
+        <div class="container d-flex container-info">
+            <div class="row">
+                <div class="col-auto">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Nome</mat-label>
+                        <input type="text" readonly matInput [value]="cliente.nome">
+                    </mat-form-field>
+                </div>
+                <div class="col-auto">
+                    <mat-form-field appearance="fill">
+                        <mat-label>CPF</mat-label>
+                        <input type="text" readonly matInput [value]="cliente.cpf">
+                    </mat-form-field>
+                </div>
+                <div class="col-auto">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Data de nasscimento</mat-label>
+                        <input type="text" readonly matInput [value]="cliente.dataNascimento">
+                    </mat-form-field>
+                </div>
+                <div class="col-auto">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Telefone</mat-label>
+                        <input type="text" readonly matInput [value]="cliente.telefone">
+                    </mat-form-field>
+                </div>
+                <div class="col-auto">
+                    <mat-form-field appearance="fill">
+                        <mat-label>contato de emergencia</mat-label>
+                        <input type="text" readonly matInput [value]="cliente.contatoEmergencia">
+                    </mat-form-field>
+                </div>
+                <div class="col-auto">
+                    <mat-form-field appearance="fill">
+                        <mat-label>E-mail</mat-label>
+                        <input type="text" readonly matInput [value]="cliente.email">
+                    </mat-form-field>
+                </div>
+                <div class="col-auto">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Data de pagamento</mat-label>
+                        <input type="text" readonly matInput [value]="cliente.dataPagamento">
+                    </mat-form-field>
+                </div>
+                <div class="col-auto">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Valor combinado</mat-label>
+                        <input type="text" readonly matInput [value]="cliente.valorCombinado">
+                    </mat-form-field>
+                </div>
+                <div class="col-auto">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Endereço</mat-label>
+                        <input type="text" readonly matInput [value]="cliente.endereco.logradouro">
+                    </mat-form-field>
+                </div>
+                <div class="col-auto">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Numero</mat-label>
+                        <input type="text" readonly matInput [value]="cliente.endereco.numero">
+                    </mat-form-field>
+                </div>
+                <div class="col-auto">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Complemento </mat-label>
+                        <input type="text" readonly matInput [value]="cliente.endereco.complemento">
+                    </mat-form-field>
+                </div>
+                <div class="col-auto">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Cidade</mat-label>
+                        <input type="text" readonly matInput [value]="cliente.endereco.cidade">
+                    </mat-form-field>
+                </div>
+            </div>
+            <table class="table">
+                <thead style="text-align: center;">
+                    <th scope="col">Data</th>
+                    <th scope="col">Valor</th>
+                    <th scope="col">Seção realizada</th>
+                    <th scope="col">Pagamento</th>
+                </thead>
+                <tbody style="text-align: center;">
+                    <th scope="row">2022-09-17</th>
+                    <td>R$ 70,00</td>
+                    <td>sim</td>
+
+                </tbody>
+             </table>
+        </div>
+    </div>
+</div>
