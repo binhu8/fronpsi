@@ -1,0 +1,15 @@
+<div class="d-flex bg-dark">
+    <nav class="side-menu">
+        <app-menu></app-menu>
+    </nav>
+    <section class="container-full bg-light">
+        
+        <full-calendar [options]="calendarOptions"></full-calendar>
+    </section>
+    <div class="modal-container" *ngIf="showModal">
+        <div class="close-modal">
+            <fa-icon [icon]="faClose"></fa-icon>
+        </div>
+        <app-add-event></app-add-event>
+    </div>
+</div>

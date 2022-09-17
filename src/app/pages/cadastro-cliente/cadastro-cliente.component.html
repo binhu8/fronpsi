@@ -1,0 +1,95 @@
+<div class="container-full bg-dark" >
+    <h1 class="text-light">Olá, preencha o formulário abaixo e conclua seu cadastro</h1>
+    <section>
+        <h3 class="mb-1">Dados pessoais</h3>
+        <div class="row">
+            <div class="col-12">
+                <mat-form-field  style="width: 100%;" appearance="fill">
+                    <mat-label>Nome Completo</mat-label>
+                    <input [(ngModel)]="form.value.nome" type="text" matInput placeholder="Digite seu nome completo">
+                </mat-form-field> 
+            </div>
+            <div class="col-6">
+                <mat-form-field  style="width: 100%;" appearance="fill">
+                    <mat-label>CPF</mat-label>
+                    <input [(ngModel)]="form.value.cpf" type="text" mask="000.000.000-00" matInput placeholder="Somente números">
+                </mat-form-field> 
+            </div>
+            <div class="col-6">
+                <mat-form-field  style="width: 100%;" appearance="fill">
+                    <mat-label>Data de nascimeto</mat-label>
+                    <input [(ngModel)]="form.value.dataNascimento" type="text" mask="00/00/0000" matInput placeholder="dd/mm/aaaa">
+                </mat-form-field> 
+            </div>
+            <div class="col-6">
+                <mat-form-field  style="width: 100%;" appearance="fill">
+                    <mat-label>Celular</mat-label>
+                    <input [(ngModel)]="form.value.telefone" type="text" mask="(00)00000-0000" matInput placeholder="Número com DDD">
+                </mat-form-field> 
+            </div>
+            <div class="col-6">
+                <mat-form-field  style="width: 100%;" appearance="fill">
+                    <mat-label>Contato de emergência</mat-label>
+                    <input [(ngModel)]="form.value.contatoEmergencia" type="text" mask="(00)00000-0000" matInput placeholder="Número com DDD">
+                </mat-form-field> 
+            </div>
+            <div class="col-12">
+                <mat-form-field  style="width: 100%;" appearance="fill">
+                    <mat-label>E-mail</mat-label>
+                    <input [(ngModel)]="form.value.email" type="email"  matInput placeholder="Digite seu e-mail">
+                </mat-form-field> 
+            </div>
+       </div>
+
+       <h3 class="mb-1 mt-4">Dados de endereço</h3>
+       <div class="row" >
+            <div class="col-6">
+                <mat-form-field style="width: 100%;" appearance="fill">
+                    <mat-label>CEP</mat-label>
+                    <input #cep (blur)="getEndereco(cep.value)" mask="00000-000" type="text" matInput placeholder="Insira seu cep">
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field style="width: 100%;" appearance="fill">
+                    <mat-label>Logradouro</mat-label>
+                    <input [value]="form.value.endereco.logradouro" type="text" matInput >
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field style="width: 100%;" appearance="fill">
+                    <mat-label>Número</mat-label>
+                    <input [(ngModel)]="form.value.endereco.numero" type="text" matInput >
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field style="width: 100%;" appearance="fill">
+                    <mat-label>Complemento</mat-label>
+                    <input [(ngModel)]="form.value.endereco.complemento" [value]="form.value.endereco.complemento" type="text" matInput >
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field style="width: 100%;" appearance="fill">
+                    <mat-label>Bairro</mat-label>
+                    <input [value]="form.value.endereco.bairro" type="text" matInput >
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field style="width: 100%;" appearance="fill">
+                    <mat-label>Cidade</mat-label>
+                    <input [value]="form.value.endereco.localidade" type="text" matInput >
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field style="width: 100%;" appearance="fill">
+                    <mat-label>Estado</mat-label>
+                    <input [value]="form.value.endereco.uf" type="text" matInput >
+                </mat-form-field>
+            </div>
+       </div>
+       <div class="row">
+        <div class="col-12">
+            <button style="width: 100%;" class="btn btn-success">Cadastrar</button>
+        </div>
+       </div>
+    </section>
+</div>

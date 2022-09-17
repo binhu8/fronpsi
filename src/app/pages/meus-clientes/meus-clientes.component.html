@@ -1,0 +1,93 @@
+<div class="d-flex bg-dark">
+    <nav class="side-menu">
+        <app-menu></app-menu>
+    </nav>
+
+    <section class="container-full " [formGroup]="form">
+        <div class="container-cadastro" *ngIf="showCadastro">
+            <div class="modal-cadastro">
+                <h1>Envie este link para seu cliente, ou abra em uma nova janela.</h1>
+                <div class="copy">
+                    <p>testo que vai ser copiado</p>
+                    <fa-icon [icon]="faCopy"></fa-icon>
+                </div>
+                <button (click)="showCadastro = false" class="btn btn-light">OK</button>
+            </div>
+        </div>
+        <div class="cadastrar">
+            <div class="row">
+                <div class="col-auto">
+                    <button (click)="showCadastro = true " class="btn btn-primary">Cadastrar Novo Cliente</button>
+                </div>
+            </div>
+        </div>
+        <div class="container-cliente">
+            <div *ngIf="showPerfil" class="perfil-cliente bg-light">
+                <app-perfil-cliente [cliente]="cliente"></app-perfil-cliente>
+            </div>
+            <div *ngFor="let cliente of clientes ; let i = index">
+                <div class="cliente">
+                    <div class="paciente">
+                        <fa-icon [icon]="faHospitalUser"></fa-icon>
+                        {{cliente.nome}}
+                    </div>
+                    <div class="options d-flex">
+                       <div class="row">
+                            <div class="col-auto">
+                                <button (click)="verPerfil(cliente)" class="btn btn-outline-primary">Ver perfil</button>
+                            </div>
+                            <div class="col-auto">
+                                <button (click)="agendarConsulta(cliente)" class="btn btn-primary">Agendar consulta</button>
+                            </div>
+                       </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="container-modal" *ngIf="showModal">
+                <div class="new-agenda">
+                    <h3>Agendar novo atendimento</h3>
+                    <div class="row">
+                        <div class="col-12">
+                            <mat-form-field appearance="fill" style="width: 100%;">
+                                <mat-label>Cliente</mat-label>
+                                <input type="text" matInput [ngModel]="cliente.nome" formControlName="title">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Data</mat-label>
+                                <input matInput formControlName="date" [matDatepicker]="picker">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field> 
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <mat-form-field style="width:100% ;"  appearance="fill">
+                                <mat-label>Horario</mat-label>
+                                <input type="time" matInput formControlName="time">
+                            </mat-form-field>
+                        </div>
+                    </div>
+    
+                    <div class="row">
+                        <div class="col-auto">
+                            <button (click)="setAgenda()" class="btn btn-primary">Agendar</button>
+                        </div>
+                        <div class="col-auto">
+                            <button (click)="showModal = false " class="btn btn-danger">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </section>
+    
+    
+    
+</div>
