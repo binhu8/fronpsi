@@ -14,10 +14,6 @@ export class LoginService {
     return this.http.post(`${this.url}/login`, user)
   }
 
-  getUserData(): Observable<any>{
-    return this.http.post(this.url, {nome: 'Carol Amaral'})
-  }
-
   get logado(): boolean{
     return localStorage.getItem('userData') ? true : false
   }

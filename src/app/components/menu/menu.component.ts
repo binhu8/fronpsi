@@ -12,7 +12,7 @@ import { ItemMenu } from 'src/app/models/item-menu';
 export class MenuComponent implements OnInit {
 
   public itensMenu: ItemMenu[] = [
-    {fasIcon: faPencil, name: 'Meu perfil', routerLink: '/meu-perfil'},
+    
     {fasIcon: faCalendar, name: 'Agenda', routerLink: '/minha-agenda'},
     {fasIcon: faUser, name: 'Meus Clientes', routerLink: '/meus-clientes'},
     {fasIcon: faDollar, name: 'Minhas finanças', routerLink: '/minhas-financas'},

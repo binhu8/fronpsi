@@ -6,12 +6,12 @@
     <section class="container-full " [formGroup]="form">
         <div class="container-cadastro" *ngIf="showCadastro">
             <div class="modal-cadastro">
-                <h1>Envie este link para seu cliente, ou abra em uma nova janela.</h1>
+                <h1>Envie este link para seu cliente ou abra em uma nova janela.</h1>
                 <div class="copy">
-                    <p>testo que vai ser copiado</p>
-                    <fa-icon [icon]="faCopy"></fa-icon>
+                    <p>{{clipboardCopy}}</p>
+                    <button [cdkCopyToClipboard]="clipboardCopy" class="btn btn-primary"> Copiar</button>
                 </div>
-                <button (click)="showCadastro = false" class="btn btn-light">OK</button>
+                <button (click)="showCadastro = false" class=" mt-2 btn btn-success">OK</button>
             </div>
         </div>
         <div class="cadastrar">
@@ -51,13 +51,13 @@
                         <div class="col-12">
                             <mat-form-field appearance="fill" style="width: 100%;">
                                 <mat-label>Cliente</mat-label>
-                                <input type="text" matInput [ngModel]="cliente.nome" formControlName="title">
+                                <input type="text" readonly matInput [ngModel]="cliente.nome" formControlName="title">
                             </mat-form-field>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <mat-form-field appearance="fill">
+                            <mat-form-field style="width: 100%;" appearance="fill">
                                 <mat-label>Data</mat-label>
                                 <input matInput formControlName="date" [matDatepicker]="picker">
                                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -72,11 +72,17 @@
                                 <input type="time" matInput formControlName="time">
                             </mat-form-field>
                         </div>
+                        <div class="col-12">
+                            <mat-form-field style="width:100% ;" appearance="fill">
+                                <mat-label>Valor da consulta</mat-label>
+                                <input type="number" placeholder="Ex: 180" matInput formControlName="valorConsulta">
+                            </mat-form-field>
+                        </div>
                     </div>
     
                     <div class="row">
                         <div class="col-auto">
-                            <button (click)="setAgenda()" class="btn btn-primary">Agendar</button>
+                            <button [disabled]="!form.valid" (click)="setAgenda()" class="btn btn-primary">Agendar</button>
                         </div>
                         <div class="col-auto">
                             <button (click)="showModal = false " class="btn btn-danger">Cancelar</button>

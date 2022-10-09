@@ -14,6 +14,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PerfilClienteModule } from 'src/app/components/perfil-cliente/perfil-cliente.module';
+import { NgxMaskModule } from 'ngx-mask';
+import {ClipboardModule} from '@angular/cdk/clipboard';
 
 
 @NgModule({
@@ -33,7 +35,9 @@ import { PerfilClienteModule } from 'src/app/components/perfil-cliente/perfil-cl
     MatDatepickerModule,
     MatNativeDateModule,
     ReactiveFormsModule,
-    PerfilClienteModule
+    NgxMaskModule.forRoot(),
+    PerfilClienteModule,
+    ClipboardModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -13,6 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { UsuarioNaoAutenticadoGuard } from './services/guards/usuario-nao-autenticado.guard';
 import { UsuarioConectadoGuard } from './services/guards/usuario-conectado.guard';
+import { LoadingModule } from './core/loading/loading.module';
 
 
 
@@ -33,7 +34,8 @@ FullCalendarModule.registerPlugins([
     HttpClientModule,
     FormsModule,
     MatFormFieldModule,
-    MatInputModule 
+    MatInputModule,
+    LoadingModule
     
   ],
   providers: [UsuarioNaoAutenticadoGuard, UsuarioConectadoGuard],

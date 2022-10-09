@@ -7,8 +7,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MenuModule } from '../menu/menu.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';
+import { NgxMaskModule } from 'ngx-mask';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -22,7 +24,10 @@ import {MatTableModule} from '@angular/material/table';
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatTableModule
+    MatTableModule,
+    FormsModule,
+    NgxMaskModule.forRoot(),
+    MatCheckboxModule
   ],
   exports:[
     PerfilClienteComponent

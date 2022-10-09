@@ -33,6 +33,13 @@ const routes: Routes = [
       path: 'cadastro-cliente/:crp', 
       loadChildren: () => import('./pages/cadastro-cliente/cadastro-cliente.module').then(m => m.CadastroClienteModule) 
     },
+    { 
+      path: 'obrigado', 
+      loadChildren: () => import('./components/congratulation/congratulation.module').then(m => m.CongratulationModule) 
+    },
+    { path: 'minhas-financas', loadChildren: () => import('./pages/minhas-financas/minhas-financas.module').then(m => m.MinhasFinancasModule) },
+    { path: 'configuracoes', loadChildren: () => import('./pages/config/config.module').then(m => m.ConfigModule) },
+    { path: 'loading', loadChildren: () => import('./core/loading/loading.module').then(m => m.LoadingModule) },
   ]
 
 @NgModule({

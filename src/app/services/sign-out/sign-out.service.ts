@@ -12,6 +12,13 @@ export class SignOutService {
   constructor(private http: HttpClient) { }
 
   addNewUser(user: any): Observable<any> {
-    return this.http.post(`${this.url}createUser`, user )
+    return this.http.post(`${this.url}user`, user )
+  }
+
+  updateUser(user: any): Observable<any> {
+    let userData = JSON.stringify(user)
+    localStorage.setItem('userData', userData)
+    console.log(userData)
+    return this.http.put(`${this.url}user/update-user`, user)
   }
 }

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
 import { faCopy } from '@fortawesome/free-regular-svg-icons';
 import { faHospitalUser } from '@fortawesome/free-solid-svg-icons';
+import { Cliente } from 'src/app/models/cliente';
+import { ClienteService } from 'src/app/services/cliente/cliente.service';
 import { EventService } from 'src/app/services/event/event.service';
 
 @Component({
@@ -11,216 +13,41 @@ import { EventService } from 'src/app/services/event/event.service';
 })
 export class MeusClientesComponent implements OnInit {
 
+  public crp: String = ''
+  public clipboardCopy: any = ''
   public faCopy = faCopy
   public cliente: any  = '';
   public showPerfil: Boolean = false
   public showModal: Boolean = false
   public showCadastro: Boolean = false
-  public clientes = [
-    {
-      nome: 'Fábio Francisco da Silva',
-     
-      telefone: '11978527227',
-      contatoEmergencia: '11986501092',
-      dataNascimento: '03/12/1995',
-      cpf: '43379495859',
-      email: 'binhudo8@gmail.com',
-      endereco: {
-        cep: '07273020',
-        logradouro: 'Rua serra talhada',
-        numero: '106',
-        complemento: 'Casa 198',
-        bairro: 'Jardim Guilhermino',
-        cidade: 'Guarulhos',
-        uf: 'sp'
-      },
-      dataPagamento:'',
-      valorCombinado: '70'
-    }, 
-    {
-      nome: 'Fábio Francisco da Silva',
-      endereco: {
-        cep: '07273020',
-        logradouro: 'Rua serra talhada',
-        numero: '106',
-        complemento: 'Casa 198',
-        bairro: 'Jardim Guilhermino',
-        cidade: 'Guarulhos',
-        uf: 'sp'
-      },
-      telefone: '11978527227',
-      contatoEmergencia: '11986501092',
-      dataNascimento: '03/12/1995',
-      cpf: '43379495859',
-      email: 'binhudo8@gmail.com',
-      dataPagamento:'',
-      valorCombinado: '70'
-    },
-    {
-      nome: 'Gabriela Alves Batista da Silva',
-      endereco: {
-        cep: '07273020',
-        logradouro: 'Rua serra talhada',
-        numero: '106',
-        complemento: 'Casa 198',
-        bairro: 'Jardim Guilhermino',
-        cidade: 'Guarulhos',
-        uf: 'sp'
-      },
-      telefone: '11978527227',
-      contatoEmergencia: '11986501092',
-      dataNascimento: '03/12/1995',
-      cpf: '43379495859',
-      email: 'binhudo8@gmail.com',
-      dataPagamento:'',
-      valorCombinado: '70'
-    },
-    {
-      nome: 'Fábio Francisco da Silva',
-      endereco: {
-        cep: '07273020',
-        logradouro: 'Rua serra talhada',
-        numero: '106',
-        complemento: 'Casa 198',
-        bairro: 'Jardim Guilhermino',
-        cidade: 'Guarulhos',
-        uf: 'sp'
-      },
-      telefone: '11978527227',
-      contatoEmergencia: '11986501092',
-      dataNascimento: '03/12/1995',
-      cpf: '43379495859',
-      email: 'binhudo8@gmail.com',
-      dataPagamento:'',
-      valorCombinado: '70'
-    },
-    {
-      nome: 'Fábio Francisco da Silva',
-      endereco: {
-        cep: '07273020',
-        logradouro: 'Rua serra talhada',
-        numero: '106',
-        complemento: 'Casa 198',
-        bairro: 'Jardim Guilhermino',
-        cidade: 'Guarulhos',
-        uf: 'sp'
-      },
-      telefone: '11978527227',
-      contatoEmergencia: '11986501092',
-      dataNascimento: '03/12/1995',
-      cpf: '43379495859',
-      email: 'binhudo8@gmail.com',
-      dataPagamento:'',
-      valorCombinado: '70'
-    },
-    {
-      nome: 'Fábio Francisco da Silva',
-      endereco: {
-        cep: '07273020',
-        logradouro: 'Rua serra talhada',
-        numero: '106',
-        complemento: 'Casa 198',
-        bairro: 'Jardim Guilhermino',
-        cidade: 'Guarulhos',
-        uf: 'sp'
-      },
-      telefone: '11978527227',
-      contatoEmergencia: '11986501092',
-      dataNascimento: '03/12/1995',
-      cpf: '43379495859',
-      email: 'binhudo8@gmail.com',
-      dataPagamento:'',
-      valorCombinado: '70'
-    },
-    {
-      nome: 'Fábio Francisco da Silva',
-      endereco: {
-        cep: '07273020',
-        logradouro: 'Rua serra talhada',
-        numero: '106',
-        complemento: 'Casa 198',
-        bairro: 'Jardim Guilhermino',
-        cidade: 'Guarulhos',
-        uf: 'sp'
-      },
-      telefone: '11978527227',
-      contatoEmergencia: '11986501092',
-      dataNascimento: '03/12/1995',
-      cpf: '43379495859',
-      email: 'binhudo8@gmail.com',
-      dataPagamento:'',
-      valorCombinado: '70'
-    },
-    {
-      nome: 'Fábio Francisco da Silva',
-      endereco: {
-        cep: '07273020',
-        logradouro: 'Rua serra talhada',
-        numero: '106',
-        complemento: 'Casa 198',
-        bairro: 'Jardim Guilhermino',
-        cidade: 'Guarulhos',
-        uf: 'sp'
-      },
-      telefone: '11978527227',
-      contatoEmergencia: '11986501092',
-      dataNascimento: '03/12/1995',
-      cpf: '43379495859',
-      email: 'binhudo8@gmail.com',
-      dataPagamento:'',
-      valorCombinado: '70'
-    },
-    {
-      nome: 'Fábio Francisco da Silva',
-      endereco: {
-        cep: '07273020',
-        logradouro: 'Rua serra talhada',
-        numero: '106',
-        complemento: 'Casa 198',
-        bairro: 'Jardim Guilhermino',
-        cidade: 'Guarulhos',
-        uf: 'sp'
-      },
-      telefone: '11978527227',
-      contatoEmergencia: '11986501092',
-      dataNascimento: '03/12/1995',
-      cpf: '43379495859',
-      email: 'binhudo8@gmail.com',
-      dataPagamento:'',
-      valorCombinado: '70'
-    },
-    {
-      nome: 'Fábio Francisco da Silva',
-      endereco: {
-        cep: '07273020',
-        logradouro: 'Rua serra talhada',
-        numero: '106',
-        complemento: 'Casa 198',
-        bairro: 'Jardim Guilhermino',
-        cidade: 'Guarulhos',
-        uf: 'sp'
-      },
-      telefone: '11978527227',
-      contatoEmergencia: '11986501092',
-      dataNascimento: '03/12/1995',
-      cpf: '43379495859',
-      email: 'binhudo8@gmail.com',
-      dataPagamento:'',
-      valorCombinado: '70'
-    }
-  ];
+  public clientes: Cliente[] = [];
   public form: FormGroup = new FormGroup({
     date: new FormControl('', Validators.required),
     time: new FormControl('', Validators.required),
     title: new FormControl('', Validators.required),
-    crp: new FormControl('', Validators.required),
-    cpfCliente: new FormControl('', Validators.required)
+    valorConsulta: new FormControl('', Validators.required),
+    crp: new FormControl('', ),
+    cpfCliente: new FormControl(''),
+    mes: new FormControl(''),
+    ano: new FormControl(''),
+    dia: new FormControl(''),
+    realizado: new FormControl(''),
+    pago: new FormControl(false)
   })
 
   public faHospitalUser = faHospitalUser
-  constructor(private eventService: EventService) { }
+  constructor(private eventService: EventService, private clienteService: ClienteService) { }
 
   ngOnInit(): void {
+    let userData: any = localStorage.getItem('userData')
+    let userObj = JSON.parse(userData)
+    this.crp = userObj.crp
+
+    this.clienteService.getClientes(this.crp).subscribe(res => {
+      this.clientes = res
+    })
+
+    this.clipboardCopy = `http://localhost:4200/cadastro-cliente/` + this.crp
   }
 
   agendarConsulta(cliente: any): void{
@@ -236,7 +63,8 @@ export class MeusClientesComponent implements OnInit {
   setAgenda(){
     let userData: any = localStorage.getItem('userData')
     let userObj = JSON.parse(userData)
-    this.form.value.crp = userObj.crp
+    this.crp = userObj.crp
+    this.form.value.crp = this.crp
 
     let ano:any  = this.form.value.date.getFullYear();
     let mes:any  = this.form.value.date.getMonth() + 1;
@@ -244,6 +72,10 @@ export class MeusClientesComponent implements OnInit {
 
     let dateTime = `${ano}-${mes < 10 ? `0${mes}`: mes}-${dia < 10 ? `0${dia}`: dia}T${this.form.value.time}`
     this.form.value.date = dateTime
+    this.form.value.mes = mes
+    this.form.value.ano = ano
+    this.form.value.dia = dia
+    this.form.value.realizado = false
     this.form.value.cpfCliente = this.cliente.cpf
 
     this.eventService.addEvent(this.form.value).subscribe(res => {

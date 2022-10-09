@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Endereco } from 'src/app/models/endereco';
 import { CepService } from 'src/app/services/cep/cep.service';
 import { SignOutService } from 'src/app/services/sign-out/sign-out.service';
@@ -33,7 +34,7 @@ export class SignOutComponent implements OnInit {
     
   })
 
-  constructor(private cepService: CepService, private signOutService: SignOutService) { }
+  constructor(private router: Router, private cepService: CepService, private signOutService: SignOutService) { }
 
   ngOnInit(): void {
   }
@@ -52,7 +53,7 @@ export class SignOutComponent implements OnInit {
 
   public addNewUser(): void {
         this.signOutService.addNewUser(this.form.value).subscribe(res => {
-          console.log(res)
+            this.router.navigate(['login'])
         })
   }
 }

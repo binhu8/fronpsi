@@ -8,4 +8,5 @@ export interface Cliente {
     contatoEmergencia: string;
     email: string;
     endereco: Endereco;
+    crp: String;
 }

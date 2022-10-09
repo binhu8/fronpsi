@@ -19,13 +19,20 @@
             padding: 1rem;
             border-radius: 5px;
 
+            
             .copy{
                 display: flex;
                 padding: 0.5rem;
+                align-items: center;
+                background-color: #f0f0f0;
+                justify-content: space-between;
+            
 
                 p{
+                    margin: 0;
                     margin-right: 5px;
                     font-size: 15px;
+                    
                 }
             }
         }
@@ -50,6 +57,10 @@
         position: absolute;
         top: 0;
         left: 0;
+    }
+
+    .perfil-cliente::-webkit-scrollbar{
+        display: none;
     }
 
     .cliente{
