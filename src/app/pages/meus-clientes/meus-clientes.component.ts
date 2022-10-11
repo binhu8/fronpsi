@@ -19,10 +19,10 @@ export class MeusClientesComponent implements OnInit {
   public clipboardCopy: any = ''
   public faCopy = faCopy
   public cliente: any  = '';
-  public showPerfil: Boolean = true
+  public showPerfil: Boolean = false
   public showModal: Boolean = false
   public showCadastro: Boolean = false
-  public clientes: Cliente[] = [];
+  public clientes: Cliente[] = []
   public faHospitalUser = faHospitalUser;
   public faMagnifingGlass = faMagnifyingGlass
 
