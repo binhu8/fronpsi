@@ -30,7 +30,13 @@
             <div class="col-6">
                 <mat-form-field  style="width: 100%;" appearance="fill">
                     <mat-label>Contato de emergência</mat-label>
-                    <input [(ngModel)]="form.value.contatoEmergencia" type="text" mask="(00)00000-0000" matInput placeholder="Número com DDD">
+                    <input [(ngModel)]="form.value.contatoEmergencia.numero" type="text" mask="(00)00000-0000" matInput placeholder="Número com DDD">
+                </mat-form-field> 
+            </div>
+            <div class="col-6">
+                <mat-form-field  style="width: 100%;" appearance="fill">
+                    <mat-label>Nome do contato</mat-label>
+                    <input [(ngModel)]="form.value.contatoEmergencia.nome" type="text" matInput placeholder="Insira o nome do contato de emergência">
                 </mat-form-field> 
             </div>
             <div class="col-12">

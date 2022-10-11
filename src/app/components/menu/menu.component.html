@@ -1,19 +1,15 @@
+
 <section>
-    <div class="profile mb-5">
+    <div class="header">
         <app-profile></app-profile>
     </div>
-    <div  class="menu  bg-dark mt-4" > 
-        <span [routerLink]="item.routerLink" routerLinkActive="active" class="item" *ngFor="let item of itensMenu">
+    <ul>
+        <li [routerLink]="item.routerLink"  routerLinkActive="active" *ngFor="let item of itensMenu">
             <fa-icon [icon]="item.fasIcon"></fa-icon>
-            <span >{{item.name}}</span>
-        </span>
-    </div>
+            <span>{{item.name}}</span>
+        </li> 
+    </ul>
 
-    <div class="logout" style="width:100% ;">
-        <div class="row">
-            <div class="col-12">
-                <button (click)="logout()" style="width: 100%;" class="btn btn-danger">Sair</button>
-            </div>
-        </div>
-    </div>
+    <button (click)="logout()" class="btn btn-danger">Sair</button>
 </section>
+

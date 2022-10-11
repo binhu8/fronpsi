@@ -18,7 +18,7 @@ import { LoadingInterceptor } from '../interceptors/loading.interceptor';
   ],
   exports: [LoadingComponent],
   providers:[
-    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
   ]
 })
 export class LoadingModule { }

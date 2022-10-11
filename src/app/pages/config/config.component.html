@@ -1,4 +1,4 @@
-<div class="d-flex bg-dark">
+<!-- <div class="d-flex bg-dark">
     <nav class="side-menu">
         <app-menu></app-menu>
     </nav>
@@ -94,4 +94,18 @@
             </div>
         </div>
     </section>
-</div>
+</div> -->
+
+<section>
+    <div class="side-menu">
+        <app-menu></app-menu>
+    </div>
+
+    <div class="container-full">
+        <div class="container">
+            <h1 class="mb-5">Configurações</h1>
+
+            <app-configuracoes [data]="userData"></app-configuracoes>
+        </div>
+    </div>
+</section>

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
 import { faCopy } from '@fortawesome/free-regular-svg-icons';
-import { faHospitalUser } from '@fortawesome/free-solid-svg-icons';
+import { faHospitalUser, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { filter } from 'rxjs/operators';
 import { Cliente } from 'src/app/models/cliente';
 import { ClienteService } from 'src/app/services/cliente/cliente.service';
 import { EventService } from 'src/app/services/event/event.service';
@@ -17,10 +19,16 @@ export class MeusClientesComponent implements OnInit {
   public clipboardCopy: any = ''
   public faCopy = faCopy
   public cliente: any  = '';
-  public showPerfil: Boolean = false
+  public showPerfil: Boolean = true
   public showModal: Boolean = false
   public showCadastro: Boolean = false
   public clientes: Cliente[] = [];
+  public faHospitalUser = faHospitalUser;
+  public faMagnifingGlass = faMagnifyingGlass
+
+  displayedColumns: string[] = ['nome', 'cpf', 'verPerfil'];
+  dataSource: any = new MatTableDataSource(this.clientes);
+
   public form: FormGroup = new FormGroup({
     date: new FormControl('', Validators.required),
     time: new FormControl('', Validators.required),
@@ -35,7 +43,6 @@ export class MeusClientesComponent implements OnInit {
     pago: new FormControl(false)
   })
 
-  public faHospitalUser = faHospitalUser
   constructor(private eventService: EventService, private clienteService: ClienteService) { }
 
   ngOnInit(): void {
@@ -45,9 +52,36 @@ export class MeusClientesComponent implements OnInit {
 
     this.clienteService.getClientes(this.crp).subscribe(res => {
       this.clientes = res
+      this.cliente = res[0]
+      this.dataSource = res
+      console.log(res)
     })
 
     this.clipboardCopy = `http://localhost:4200/cadastro-cliente/` + this.crp
+
+    this.verificaNovosClientes()
+  }
+
+  applyFilter(event: KeyboardEvent) {
+    console.log(event)
+    const filterValue = (event.target as HTMLInputElement).value;
+    if(event.code == "Backspace"){
+      this.dataSource = this.clientes.filter((a: any) => a.nome.toLowerCase().indexOf(filterValue) >=0 )
+    }else{
+      this.dataSource = this.dataSource.filter((a: any) => a.nome.toLowerCase().indexOf(filterValue) >=0 )
+    }
+
+    console.log(this.dataSource)
+  }
+
+  verificaNovosClientes(){
+    setInterval(()=>{
+      this.clienteService.getClientes(this.crp).subscribe(res => {
+        if(this.clientes.length < res.length){
+          this.clientes = res
+        }
+      })
+    }, 1000)
   }
 
   agendarConsulta(cliente: any): void{

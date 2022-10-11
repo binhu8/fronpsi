@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class LoginService {
-  public url: any = "http://localhost:8000"
+  public url: any = "https://psimanager.herokuapp.com"
 
   constructor(private http: HttpClient) { }
 

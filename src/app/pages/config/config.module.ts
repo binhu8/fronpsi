@@ -8,11 +8,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {  MatInputModule } from '@angular/material/input';
 import { NgxMaskModule } from 'ngx-mask';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ConfiguracoesComponent } from './components/configuracoes/configuracoes.component';
+import {MatDividerModule} from '@angular/material/divider';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
   declarations: [
-    ConfigComponent
+    ConfigComponent,
+    ConfiguracoesComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +26,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatInputModule,
     NgxMaskModule.forRoot(),
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatDividerModule,
+    FontAwesomeModule
   ]
 })
 export class ConfigModule { }

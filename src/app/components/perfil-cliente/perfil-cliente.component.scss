@@ -1,59 +1,71 @@
-.container-full{
-    width: 100vw;
-    height: 100vh;
-    padding: 1rem;
-    overflow: hidden;
-
-    .container-info{
-        background: #fafafa;
-        display: flex;
-        flex-direction: column;
-        border-radius: 5px;
-        padding: 1rem;
-        overflow-x: auto;
-
-        table{
-           width: 100%; 
-           margin-top: 1rem;
-           border-radius: 5px;
-
-           .mat-form-field-wrapper{
-                padding: 0;
-            }
-        }
-    }
-}
-
-
-
-.modal-pdf{
-    width: 100vw ;
-    height: 100vh;
-    position: absolute;
-    overflow: auto;
+section{
     display: flex;
-    justify-content: center;
-    padding: 1rem;
-    top: 0;
-    left: 0;
-
-    .container-pdf{
-        width: 21cm;
-        height: 29.7cm;
-        padding: 1rem;
-        background: #fafafa;
-        border-radius: 5px;
+    width: 100vw;
     
-        .cabecalho{
-            width: 100%;
-            text-align: center;
-        }
+
+    .container-full{
+        background-color: #fff;
+        
+        background-color: #fff;
     }
 }
 
-.pdf{
-    .info{
-        border-radius: 10px;
-    }
-}
+// .container-full{
+//     width: 100vw;
+//     height: 100vh;
+//     padding: 1rem;
+//     overflow: hidden;
+
+//     .container-info{
+//         background: #fafafa;
+//         display: flex;
+//         flex-direction: column;
+//         border-radius: 5px;
+//         padding: 1rem;
+//         overflow-x: auto;
+
+//         table{
+//            width: 100%; 
+//            margin-top: 1rem;
+//            border-radius: 5px;
+
+//            .mat-form-field-wrapper{
+//                 padding: 0;
+//             }
+//         }
+//     }
+// }
+
+
+
+// .modal-pdf{
+//     width: 100vw ;
+//     height: 100vh;
+//     position: absolute;
+//     overflow: auto;
+//     display: flex;
+//     justify-content: center;
+//     padding: 1rem;
+//     top: 0;
+//     left: 0;
+
+//     .container-pdf{
+//         width: 21cm;
+//         height: 29.7cm;
+//         padding: 1rem;
+//         background: #fafafa;
+//         border-radius: 5px;
+    
+//         .cabecalho{
+//             width: 100%;
+//             text-align: center;
+//         }
+//     }
+// }
+
+// .pdf{
+//     .info{
+//         border-radius: 10px;
+//     }
+// }
 

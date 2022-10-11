@@ -18,7 +18,10 @@ export class CadastroClienteComponent implements OnInit {
     cpf: new FormControl('', Validators.required), 
     dataNascimento: new FormControl('', Validators.required), 
     telefone: new FormControl('', Validators.required), 
-    contatoEmergencia: new FormControl('', Validators.required), 
+    contatoEmergencia: new FormGroup({
+      numero: new FormControl('', Validators.required),
+      nome: new FormControl('',Validators.required)
+    }),
     email: new FormControl('', Validators.required), 
     endereco: new FormGroup({
       cep: new FormControl(''),

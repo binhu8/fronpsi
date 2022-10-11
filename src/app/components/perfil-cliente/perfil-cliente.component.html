@@ -1,4 +1,4 @@
-<div class="container-full bg-dark d-flex">
+<!-- <div class="container-full bg-dark d-flex">
 
     <nav class="side-menu">
         <app-menu></app-menu>
@@ -45,8 +45,14 @@
                 </div>
                 <div class="col-auto">
                     <mat-form-field appearance="fill">
-                        <mat-label>contato de emergencia</mat-label>
-                        <input  mask="(00)00000-0000" type="text" readonly matInput [(ngModel)]="cliente.contatoEmergencia">
+                        <mat-label>Contato de emergência</mat-label>
+                        <input  mask="(00)00000-0000" type="text" readonly matInput [(ngModel)]="cliente.contatoEmergencia.numero">
+                    </mat-form-field>
+                </div>
+                <div class="col-auto">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Nome do contato</mat-label>
+                        <input  type="text" readonly matInput [(ngModel)]="cliente.contatoEmergencia.nome">
                     </mat-form-field>
                 </div>
                 <div class="col-auto">
@@ -55,18 +61,7 @@
                         <input type="text" readonly matInput [value]="cliente.email">
                     </mat-form-field>
                 </div>
-                <div class="col-auto">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Data de pagamento</mat-label>
-                        <input type="text" readonly matInput [value]="cliente.dataPagamento">
-                    </mat-form-field>
-                </div>
-                <div class="col-auto">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Valor combinado</mat-label>
-                        <input type="text" readonly matInput [value]="cliente.valorCombinado">
-                    </mat-form-field>
-                </div>
+                
                 <div class="col-auto">
                     <mat-form-field appearance="fill">
                         <mat-label>Endereço</mat-label>
@@ -117,28 +112,25 @@
             <div class="table  p-1">
                 <table  mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     
-                    <!--- Note that these columns can be defined in any order.
-                          The actual rendered columns are set as a property on the row definition" -->
-                  
-                    <!-- Position Column -->
+                   
                     <ng-container matColumnDef="data">
                       <th mat-header-cell *matHeaderCellDef> Data </th>
                       <td mat-cell *matCellDef="let element"> {{element.dia}}/{{element.mes}}/{{element.ano}} </td>
                     </ng-container>
     
-                    <!-- Symbol Column -->
+                   
                     <ng-container matColumnDef="hora">
                         <th mat-header-cell *matHeaderCellDef> Hora </th>
                         <td mat-cell *matCellDef="let element"> {{element.time}} </td>
                       </ng-container>
                   
-                    <!-- Name Column -->
+                   
                     <ng-container matColumnDef="valor">
                       <th mat-header-cell *matHeaderCellDef> Valor da Consulta </th>
                       <td mat-cell *matCellDef="let element">R$ {{element.valorConsulta}}</td>
                     </ng-container>
                   
-                    <!-- Weight Column -->
+                   
                     <ng-container matColumnDef="realizado">
                       <th mat-header-cell *matHeaderCellDef> Sessão Realizada </th>
                       <td mat-cell *matCellDef="let element"> <mat-checkbox (change)="updateEvent(element)" [(ngModel)]="element.realizado">Sim</mat-checkbox></td>
@@ -235,28 +227,25 @@
             <div class=" mt-5 table  p-1">
                 <table style="width: 100% ;"  mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-                    <!--- Note that these columns can be defined in any order.
-                          The actual rendered columns are set as a property on the row definition" -->
                     
-                    <!-- Position Column -->
                     <ng-container matColumnDef="data">
                       <th mat-header-cell *matHeaderCellDef> Data </th>
                       <td mat-cell *matCellDef="let element"> {{element.dia}}/{{element.mes}}/{{element.ano}} </td>
                     </ng-container>
 
-                    <!-- Symbol Column -->
+                    
                     <ng-container matColumnDef="hora">
                         <th mat-header-cell *matHeaderCellDef> Hora </th>
                         <td mat-cell *matCellDef="let element"> {{element.time}} </td>
                       </ng-container>
                   
-                    <!-- Name Column -->
+                   
                     <ng-container matColumnDef="valor">
                       <th mat-header-cell *matHeaderCellDef> Valor da Consulta </th>
                       <td mat-cell *matCellDef="let element">R$ {{element.valorConsulta}}</td>
                     </ng-container>
                 
-                    <!-- Weight Column -->
+                    
                     <ng-container matColumnDef="realizado">
                       <th mat-header-cell *matHeaderCellDef> Sessão Realizada </th>
                       <td mat-cell *matCellDef="let element"> <mat-checkbox (change)="updateEvent(element)" [(ngModel)]="element.realizado">Sim</mat-checkbox></td>
@@ -284,4 +273,14 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
+
+<section>
+    <div class="side-menu">
+        <app-menu></app-menu>
+    </div>
+
+    <div class="container-full">
+        <div class="container"></div>
+    </div>
+</section>

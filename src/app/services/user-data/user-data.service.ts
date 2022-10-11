@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class UserDataService {
 
-  public url: string = 'http://localhost:8000/'
+  public url: string = 'https://psimanager.herokuapp.com/'
 
   constructor(private http: HttpClient) { }
 

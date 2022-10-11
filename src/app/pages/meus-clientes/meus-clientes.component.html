@@ -1,4 +1,4 @@
-<div class="d-flex bg-dark">
+<!-- <div class="d-flex bg-dark">
     <nav class="side-menu">
         <app-menu></app-menu>
     </nav>
@@ -22,9 +22,7 @@
             </div>
         </div>
         <div class="container-cliente">
-            <div *ngIf="showPerfil" class="perfil-cliente bg-light">
-                <app-perfil-cliente [cliente]="cliente"></app-perfil-cliente>
-            </div>
+            
             <div *ngFor="let cliente of clientes ; let i = index">
                 <div class="cliente">
                     <div class="paciente">
@@ -44,56 +42,145 @@
                 </div>
             </div>
     
-            <div class="container-modal" *ngIf="showModal">
-                <div class="new-agenda">
-                    <h3>Agendar novo atendimento</h3>
-                    <div class="row">
-                        <div class="col-12">
-                            <mat-form-field appearance="fill" style="width: 100%;">
-                                <mat-label>Cliente</mat-label>
-                                <input type="text" readonly matInput [ngModel]="cliente.nome" formControlName="title">
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <mat-form-field style="width: 100%;" appearance="fill">
-                                <mat-label>Data</mat-label>
-                                <input matInput formControlName="date" [matDatepicker]="picker">
-                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                <mat-datepicker #picker></mat-datepicker>
-                            </mat-form-field> 
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <mat-form-field style="width:100% ;"  appearance="fill">
-                                <mat-label>Horario</mat-label>
-                                <input type="time" matInput formControlName="time">
-                            </mat-form-field>
-                        </div>
-                        <div class="col-12">
-                            <mat-form-field style="width:100% ;" appearance="fill">
-                                <mat-label>Valor da consulta</mat-label>
-                                <input type="number" placeholder="Ex: 180" matInput formControlName="valorConsulta">
-                            </mat-form-field>
-                        </div>
-                    </div>
-    
-                    <div class="row">
-                        <div class="col-auto">
-                            <button [disabled]="!form.valid" (click)="setAgenda()" class="btn btn-primary">Agendar</button>
-                        </div>
-                        <div class="col-auto">
-                            <button (click)="showModal = false " class="btn btn-danger">Cancelar</button>
-                        </div>
-                    </div>
+          
+        </div>
+       
+    </section>    
+</div> -->
+
+<section>
+
+   
+
+    <div class="side-menu">
+        <app-menu></app-menu>
+    </div>
+
+    <div class="container">
+
+       
+
+        <div class="container-cadastro" *ngIf="showCadastro">
+            <div class="modal-cadastro">
+                <h1>Envie este link para seu cliente ou abra em uma nova janela.</h1>
+                <div class="copy">
+                    <p>{{clipboardCopy}}</p>
+                    <button [cdkCopyToClipboard]="clipboardCopy" class="btn btn-primary"> Copiar</button>
+                </div>
+                <button (click)="showCadastro = false" class=" mt-2 btn btn-success">OK</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-auto">
+                <h2>Meus Clientes</h2>
+            </div>
+            <div class="col-auto">
+                <button (click)="showCadastro = !showCadastro" class="btn btn-outline-primary">Cadastrar novo</button>
+            </div>
+        </div>
+        <mat-divider class="mt-4 mb-5"></mat-divider>
+
+
+        <div class="row mb-3">
+            <div class="col-4">
+                <div class="input-group">
+                    <span class="input-group-text"><fa-icon [icon]="faMagnifingGlass"></fa-icon></span>
+                    <input class="form-control" (keyup)="applyFilter($event)" placeholder="Ex. Fabio Francisco" #input type="text">
                 </div>
             </div>
         </div>
-       
-    </section>
+        
+          
+        <div class="container-table mat-elevation-z8" tabindex="0">
+            <table mat-table [dataSource]="dataSource" >
+          
+                <ng-container matColumnDef="nome">
+                    <th mat-header-cell *matHeaderCellDef> Nome </th>
+                    <td mat-cell *matCellDef="let element"> 
+                        <div>
+                            <p style="margin: 0; margin-top: 3px; padding: 0;">{{element.nome}}</p>
+                            <p class="text-secondary" style=" margin:0;font-size: 12px;">{{element.email}}</p>
+                        </div> 
+                    </td>
+                </ng-container>
     
-    
-    
-</div>
+                <ng-container matColumnDef="cpf">
+                    <th  mat-header-cell *matHeaderCellDef> CPF </th>
+                    <td mat-cell *matCellDef="let element"><p>{{element.cpf | mask: '000.000.000-00'}}</p></td>
+                  </ng-container>
+              
+                <ng-container matColumnDef="verPerfil" stickyEnd>
+                    <th mat-header-cell *matHeaderCellDef> Ver Perfil </th>
+                    <td mat-cell *matCellDef="let element">
+                        <button mat-icon-button [matMenuTriggerFor]="menu" ><mat-icon >more_horiz</mat-icon></button> 
+                        <mat-menu #menu="matMenu">
+                            <button (click)="verPerfil(element)" mat-menu-item>Ver Perfil</button>
+                            <button (click)="agendarConsulta(element)" mat-menu-item>Agendar consulta</button>
+                        </mat-menu>
+                    </td>
+                </ng-container>
+              
+            
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                <tr mat-row matRipple *matRowDef="let row; columns: displayedColumns;"></tr>
+              
+                <tr class="mat-row" *matNoDataRow>
+                  <td class="mat-cell" colspan="4">Não encontramos nenhum usuario com o nome: "{{input.value}}"</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="container-modal" [formGroup]="form" *ngIf="showModal">
+        <div class="new-agenda">
+            <h3>Agendar novo atendimento</h3>
+            <div class="row">
+                <div class="col-12">
+                    <mat-form-field appearance="fill" style="width: 100%;">
+                        <mat-label>Cliente</mat-label>
+                        <input type="text" readonly matInput [ngModel]="cliente.nome" formControlName="title">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <mat-form-field style="width: 100%;" appearance="fill">
+                        <mat-label>Data</mat-label>
+                        <input matInput formControlName="date" [matDatepicker]="picker">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field> 
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <mat-form-field style="width:100% ;"  appearance="fill">
+                        <mat-label>Horario</mat-label>
+                        <input type="time" matInput formControlName="time">
+                    </mat-form-field>
+                </div>
+                <div class="col-12">
+                    <mat-form-field style="width:100% ;" appearance="fill">
+                        <mat-label>Valor da consulta</mat-label>
+                        <input type="number" placeholder="Ex: 180" matInput formControlName="valorConsulta">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-auto">
+                    <button [disabled]="!form.valid" (click)="setAgenda()" class="btn btn-primary">Agendar</button>
+                </div>
+                <div class="col-auto">
+                    <button (click)="showModal = false " class="btn btn-danger">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="showPerfil" class="perfil-cliente">
+        <app-perfil-cliente [cliente]="cliente"></app-perfil-cliente>
+    </div>
+</section>

@@ -1,0 +1,160 @@
+<section>
+    <div class="row">
+        <h2 class="mb-1">Meu perfil</h2>
+        <p class="text-secondary" style="font-size: 12px;">Atualize ou visualize suas informações pessoais</p>
+    </div>
+
+    <mat-divider class="mt-3 mb-4"></mat-divider>
+
+    <div class="row">
+        <div class="col-auto">
+            <div class="row">
+                <div class="col-auto">
+                    <div class="input-group">
+                        <span class="input-group-text">Nome</span>
+                        <input [readonly]="readonly" [(ngModel)]="data.nome" type="text" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-auto">
+            <div class="row">
+                <div class="input-group">
+                    <span class="input-group-text">Sobrenome</span>
+                    <input [readonly]="readonly" [(ngModel)]="data.sobrenome" type="text" class="form-control">
+                </div>
+            </div>
+        </div>
+
+        <mat-divider class="mt-4 mb-4"></mat-divider>
+        <div class="row ">
+            <div class="col-auto">
+                <div class="row">
+                    <div class="col-auto">
+                        <div class="input-group">
+                            <span class="input-group-text">Nascimento</span>
+                            <input mask="00/00/0000" [readonly]="readonly" [(ngModel)]="data.dataNascimento" type="text" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="col-auto">
+                        <div class="input-group">
+                            <span class="input-group-text">cpf</span>
+                            <input [readonly]="readonly" [(ngModel)]="data.cpf" mask="000.000.000-00" type="text" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="col-auto">
+                        <div class="input-group">
+                            <span class="input-group-text">crp</span>
+                            <input [readonly]="readonly" [(ngModel)]="data.crp" mask="00.0000" type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <mat-divider class="mt-4 mb-5"></mat-divider>
+
+    <div class="row">
+        <h2 class="mb-1">Meu Endereço</h2>
+        <p class="text-secondary" style="font-size: 12px;">Atualize ou visualize suas informações de endereço</p>
+    </div>
+
+    <mat-divider class="mt-2 mb-4"></mat-divider>
+
+    <div class="row ">
+        <div class="col-auto">
+            <div class="row">
+                <div class="col-auto">
+                    <div class="input-group">
+                        <span class="input-group-text">cep</span>
+                        <input #cep (blur)="getCep(cep.value)" mask="00000-000" [readonly]="readonly" [(ngModel)]="data.endereco.cep" type="text" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-auto">
+                    <div class="input-group">
+                        <span class="input-group-text">logradouro</span>
+                        <input [readonly]="readonly" [(ngModel)]="data.endereco.logradouro" type="text" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-2">
+                    <div class="input-group">
+                        <span class="input-group-text">Nº</span>
+                        <input [readonly]="readonly" [(ngModel)]="data.endereco.numero"  type="text" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-3">
+                    <div class="input-group">
+                        <span class="input-group-text">Complemento</span>
+                        <input class="form-control" [readonly]="readonly" [(ngModel)]="data.endereco.complemento" type="text">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <mat-divider class="mt-4 mb-4"></mat-divider>
+
+    <div class="row">
+        
+        <div class="col-auto">
+            <div class="input-group">
+                <span class="input-group-text">Bairro</span>
+                <input class="form-control" [readonly]="readonly" [(ngModel)]="data.endereco.bairro" type="text">
+            </div>
+        </div>
+        <div class="col-auto">
+            <div class="input-group">
+                <span class="input-group-text">Cidade</span>
+                <input class="form-control" [readonly]="readonly" [(ngModel)]="data.endereco.localidade" type="text">
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="input-group">
+                <span class="input-group-text">UF</span>
+                <input class="form-control" [readonly]="readonly" [(ngModel)]="data.endereco.uf" type="text">
+            </div>
+        </div>
+    </div>
+
+    <mat-divider class="mt-4 mb-5"></mat-divider>
+
+    <div class="row">
+        <h2 class="mb-1">Minha conta</h2>
+        <p class="text-secondary" style="font-size: 12px;">Atualize ou visualize suas informações da sua conta</p>
+    </div>
+
+    <mat-divider class="mt-3 mb-4"></mat-divider>
+
+    <div class="row">
+        <div class="col-auto">
+            <div class="input-group">
+                <span class="input-group-text">@</span>
+                <input [readonly]="readonly" [(ngModel)]="data.email" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="col-auto">
+            <div class="input-group">
+                <span class="input-group-text"><fa-icon [icon]="faLocker"></fa-icon></span>
+                <input [readonly]="readonly" [(ngModel)]="data.senha" type="text" class="form-control">
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5 row">
+        <div class="col-auto">
+            <button *ngIf="readonly" [disabled]="!readonly"  (click)="readonly = false" class="btn btn-primary">Editar</button>
+            <button *ngIf="!readonly" [disabled]="readonly"  (click)="readonly = true" class="btn btn-danger">Cancelar</button>
+        </div>
+        <div class="col-auto">
+            <button (click)="updateUser()" [disabled]="readonly" class="btn btn-success">Salvar</button>
+        </div>
+    </div>
+    
+</section>

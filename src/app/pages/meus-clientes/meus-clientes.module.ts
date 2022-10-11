@@ -16,6 +16,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { PerfilClienteModule } from 'src/app/components/perfil-cliente/perfil-cliente.module';
 import { NgxMaskModule } from 'ngx-mask';
 import {ClipboardModule} from '@angular/cdk/clipboard';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
 
 
 @NgModule({
@@ -37,7 +42,12 @@ import {ClipboardModule} from '@angular/cdk/clipboard';
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
     PerfilClienteModule,
-    ClipboardModule
+    ClipboardModule,
+    MatDividerModule,
+    MatTableModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatIconModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

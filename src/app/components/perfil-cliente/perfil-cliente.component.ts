@@ -27,8 +27,8 @@ export class PerfilClienteComponent implements OnInit {
   public faArrowLeft = faArrowLeft
   public userData: any = {}
   public showPdf: boolean = false;
-  public month: any = new Date().getMonth() + 1
-  public year: any = new Date().getFullYear()
+  public month: number = new Date().getMonth() + 1
+  public year: number = new Date().getFullYear()
 
   constructor(
     private eventService: EventService, 
@@ -39,6 +39,7 @@ export class PerfilClienteComponent implements OnInit {
   ngOnInit(): void {
     this.userData = this.userDataService.getUserData()
     this.getEvents()
+    console.log(this.cliente)
   }
 
   getBeforeMonth(): void{

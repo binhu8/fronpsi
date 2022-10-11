@@ -8,7 +8,7 @@ import { UserDataService } from '../user-data/user-data.service';
 })
 export class EventService {
 
-  public url = "http://localhost:8000"
+  public url = "https://psimanager.herokuapp.com"
   
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
