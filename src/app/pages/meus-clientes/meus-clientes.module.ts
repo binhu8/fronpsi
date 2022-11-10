@@ -12,8 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { PerfilClienteModule } from 'src/app/components/perfil-cliente/perfil-cliente.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskModule } from 'ngx-mask';
 import {ClipboardModule} from '@angular/cdk/clipboard';
 import { MatDividerModule } from '@angular/material/divider';
@@ -21,6 +20,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatRadioButton, MatRadioModule} from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -41,13 +43,16 @@ import {MatIconModule} from '@angular/material/icon';
     MatNativeDateModule,
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
-    PerfilClienteModule,
     ClipboardModule,
     MatDividerModule,
     MatTableModule,
     MatButtonModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
+    MatSlideToggleModule,
+    FormsModule,
+    MatRadioModule,
+    MatSelectModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

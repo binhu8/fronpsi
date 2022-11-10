@@ -30,4 +30,29 @@
         
     }
 
+@media screen and(max-width: 1000px) {
 
+    .bg-dark{
+        flex-direction: column-reverse;
+    }
+    .side-menu{
+        width: 100%;
+        height: 10vh;
+    }
+
+    .side-menu::before{
+        content: '';
+        width: 60px;
+        height: 60px;
+        background-color: black;
+    }
+    .container-full{
+        width: 100%;
+        height: 85vh;
+        
+        full-calendar{
+            width: 100%;
+            height: 100%;
+        }
+    }
+}

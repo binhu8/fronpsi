@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Cliente } from 'src/app/models/cliente';
 import { Observable } from 'rxjs';
+import { Params } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +14,22 @@ export class ClienteService {
   constructor(private http: HttpClient) { }
 
   addCliente(cliente: Cliente): Observable<any> {
-      return this.http.post(`${this.url}/add-cliente`, cliente)
+      return this.http.post(`${environment.api}/add-cliente`, cliente)
   }
 
   getClientes(crp:String): Observable<any> {
-    return this.http.get(`${this.url}/clientes/?crp=${crp}`)
+    return this.http.get(`${environment.api}/clientes/?crp=${crp}`)
+  }
+
+  getClientById(id: string){
+    return this.http.get(`${environment.api}/clientes/${id}`)
+  }
+
+  updateCliente(cliente: any): Observable<any> {
+    return this.http.put<any>(`${environment.api}/cliente/update`, cliente)
+  }
+
+  deleteCliente(cliente: Params): Observable<any> {
+    return this.http.delete<any>(`${environment.api}/delete/cliente`, {params: cliente})
   }
 }

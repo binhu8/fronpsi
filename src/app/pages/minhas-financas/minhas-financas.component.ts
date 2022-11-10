@@ -14,12 +14,16 @@ export class MinhasFinancasComponent implements OnInit {
   public atualYear: any = new Date().getFullYear()
   public dataSource: any = [];
   public total: number = 0
-  public displayColumns: string[]= ['data',  'hora', 'cliente', 'valor']
+  public displayColumns: string[]= ['data', 'valor']
 
   constructor(private evetService: EventService, private userDataService: UserDataService) { }
 
   ngOnInit(): void {
     this.getEventMonth()
+  }
+
+  getTotalCost() {
+    return this.dataSource.map((t:any) => t.valorConsulta).reduce((acc:any, value:any) => acc + value, 0);
   }
 
   getBeforeMonth(){

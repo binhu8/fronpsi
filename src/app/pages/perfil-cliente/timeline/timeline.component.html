@@ -1,0 +1,34 @@
+<div class="container p-2">
+    <mat-accordion>
+        <mat-expansion-panel *ngFor="let element of dataSource">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <div class="date me-5">
+                        <span>
+                            <mat-icon>event</mat-icon>
+                            {{element.data}} às {{element.time}}
+                        </span>
+                    </div>
+                </mat-panel-title>
+                <mat-panel-description>
+                    <div class="payment me-4" style="z-index: 100;">
+                        <span>
+                            <mat-checkbox (change)="updateEvent(element)" [(ngModel)]="element.pago">Pagamento Realizado</mat-checkbox>
+                            <mat-icon>payments</mat-icon>
+                        </span>
+                    </div>
+                    <div class="accomplished">
+                        <span>
+                            <mat-checkbox (change)="updateEvent(element)" [(ngModel)]="element.realizado">Consulta Realizada</mat-checkbox>
+                            <mat-icon>done</mat-icon>
+                        </span>
+                    </div>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <mat-form-field  appearance="outline">
+                <textarea #textarea (blur)="updateEvent(element)"  rows="20" [(ngModel)]="element.observacao" style="width: 100%; height: auto;"  oninput="if(this.scrollHeight > this.offsetHeight) this.rows ++" matInput ></textarea>
+                <mat-label>Observações da consulta</mat-label>
+            </mat-form-field> 
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>

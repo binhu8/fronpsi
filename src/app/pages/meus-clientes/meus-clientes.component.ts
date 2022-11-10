@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { i18nMetaToJSDoc } from '@angular/compiler/src/render3/view/i18n/meta';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
+import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { faCopy } from '@fortawesome/free-regular-svg-icons';
 import { faHospitalUser, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { filter } from 'rxjs/operators';
+import * as moment from 'moment'
+import { LoadingService } from 'src/app/core/services/loading.service';
 import { Cliente } from 'src/app/models/cliente';
 import { ClienteService } from 'src/app/services/cliente/cliente.service';
 import { EventService } from 'src/app/services/event/event.service';
@@ -15,22 +18,35 @@ import { EventService } from 'src/app/services/event/event.service';
 })
 export class MeusClientesComponent implements OnInit {
 
-  public crp: String = ''
-  public clipboardCopy: any = ''
-  public faCopy = faCopy
-  public cliente: any  = '';
-  public showPerfil: Boolean = false
-  public showModal: Boolean = false
-  public showCadastro: Boolean = false
-  public clientes: Cliente[] = []
-  public faHospitalUser = faHospitalUser;
-  public faMagnifingGlass = faMagnifyingGlass
+  loading = false
+  periodo: number | null =  null
+  crp: String = ''
+  clipboardCopy: any = ''
+  faCopy = faCopy
+  cliente: any  = '';
+  showPerfil: Boolean = false
+  showModal: Boolean = false
+  showCadastro: Boolean = false
+  clientes: Cliente[] = []
+  faHospitalUser = faHospitalUser;
+  faMagnifingGlass = faMagnifyingGlass;
+  valorPadrao: any = ''
+  events: any[] = [ ]
+  puloSemana: number = 0
+  toggle = false
+
+  selectRepeatOptions = [
+    {value: 1, viewValue: 'Diariamente'},
+    {value: 7, viewValue: 'Semanalmente'},
+    {value: 14, viewValue: 'Quizenalmente'},
+    {value: 30, viewValue: 'Mensalmente'},
+  ]
 
   displayedColumns: string[] = ['nome', 'cpf', 'verPerfil'];
   dataSource: any = new MatTableDataSource(this.clientes);
 
-  public form: FormGroup = new FormGroup({
-    date: new FormControl('', Validators.required),
+  form: FormGroup = new FormGroup({
+    // date: new FormControl('', Validators.required),
     time: new FormControl('', Validators.required),
     title: new FormControl('', Validators.required),
     valorConsulta: new FormControl('', Validators.required),
@@ -39,16 +55,31 @@ export class MeusClientesComponent implements OnInit {
     mes: new FormControl(''),
     ano: new FormControl(''),
     dia: new FormControl(''),
-    realizado: new FormControl(''),
-    pago: new FormControl(false)
+    realizado: new FormControl(false),
+    pago: new FormControl(false),
+    data: new FormControl(''),
+    meet: new FormControl(''),
+    color: new FormControl(''),
+    start: new FormControl(''),
+    end: new FormControl(''),
+    repeat: new FormControl(''),
+    finalDate: new FormControl('')
   })
 
-  constructor(private eventService: EventService, private clienteService: ClienteService) { }
+  constructor(
+    private eventService: EventService, 
+    private clienteService: ClienteService,
+    private _adapter: DateAdapter<any>,
+    private loadingService: LoadingService,
+    @Inject ( MAT_DATE_LOCALE) private _locale: string
+    ) { }
 
   ngOnInit(): void {
     let userData: any = localStorage.getItem('userData')
     let userObj = JSON.parse(userData)
+    console.log('ai esta valor padrão', userObj)
     this.crp = userObj.crp
+    this.form.patchValue({valorConsulta: userObj.valorConsultaPadrao}) 
 
     this.clienteService.getClientes(this.crp).subscribe(res => {
       this.clientes = res
@@ -57,9 +88,15 @@ export class MeusClientesComponent implements OnInit {
       console.log(res)
     })
 
-    this.clipboardCopy = `http://localhost:4200/cadastro-cliente/` + this.crp
+    this.clipboardCopy = `https://psimanager.netlify.app/cadastro-cliente/` + this.crp
 
     this.verificaNovosClientes()
+    this.ptBr()
+  }
+
+  ptBr(){
+    this._locale = 'pt-BR'
+    this._adapter.setLocale(this._locale)
   }
 
   applyFilter(event: KeyboardEvent) {
@@ -77,7 +114,8 @@ export class MeusClientesComponent implements OnInit {
   verificaNovosClientes(){
     setInterval(()=>{
       this.clienteService.getClientes(this.crp).subscribe(res => {
-        if(this.clientes.length < res.length){
+        if(this.dataSource.length < res.length && this.clientes.length < res.length){
+          this.dataSource = res
           this.clientes = res
         }
       })
@@ -95,25 +133,113 @@ export class MeusClientesComponent implements OnInit {
     this.showPerfil=true
   }
   setAgenda(){
-    let userData: any = localStorage.getItem('userData')
-    let userObj = JSON.parse(userData)
-    this.crp = userObj.crp
-    this.form.value.crp = this.crp
+  
+    this.loadingService.show()
+    this.showModal = false
 
-    let ano:any  = this.form.value.date.getFullYear();
-    let mes:any  = this.form.value.date.getMonth() + 1;
-    let dia:any  = this.form.value.date.getDate() ;
+    
+  
+      if(this.events.length < 1) {
+        this.events.push(this.form.value)
+        this.setDateforEvents()
+      }else{
+        this.setDateforEvents()
+      }
+      console.log(this.events)
+   
+    this.eventService.getMeetRoom().subscribe(res => {
+      this.events.forEach(element => {
+        element.meet = res
+      })
 
-    let dateTime = `${ano}-${mes < 10 ? `0${mes}`: mes}-${dia < 10 ? `0${dia}`: dia}T${this.form.value.time}`
-    this.form.value.date = dateTime
-    this.form.value.mes = mes
-    this.form.value.ano = ano
-    this.form.value.dia = dia
-    this.form.value.realizado = false
-    this.form.value.cpfCliente = this.cliente.cpf
+      console.log(this.events)
 
-    this.eventService.addEvent(this.form.value).subscribe(res => {
-      location.reload()
+      this.eventService.addEvent(this.events).subscribe(res => {
+        location.reload()
+      })
+    });
+
+    
+  }
+
+
+  setDateforEvents(){
+
+   
+
+    this.events.forEach(element => {
+
+      let userData: any = localStorage.getItem('userData')
+      let userObj = JSON.parse(userData)
+      this.crp = userObj.crp
+      element.crp = this.crp
+
+      let ano:any  = element.start.getFullYear();
+      let mes:any  = element.start.getMonth() + 1;
+      let dia:any  = element.start.getDate() ;
+      
+      element.data = `${dia}/${mes}/${ano}`
+      element.mes = mes
+      element.ano = ano
+      element.dia = dia
+      element.realizado = false
+      element.cpfCliente = this.cliente.cpf;
+      element.color = this.generateColor();
+      element.start = moment(element.start).format(`YYYY-MM-DD[T]${element.time}`)
+      console.log(this.form.value.color)
+     })
+  }
+
+  generateColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    
+    return color;
+    
+  }
+
+  deleteCliente(cliente: Cliente){
+    this.clienteService.deleteCliente(cliente).subscribe(res => {
+      this.dataSource = res;
+      this.clientes= res
+    });
+
+    this.eventService.event$.subscribe(res => {
+      window.location.reload()
+      console.log('response de evento', res)
     })
   }
+
+  teste(){
+    let form = this.form.value
+    this.events = []
+    let currentDate: any = this.form.value.start
+    let startDate:any = new Date(this.form.value.start)
+    let endDate:any = new Date(this.form.value.finalDate) 
+    let msDays = endDate - startDate
+    let periodo = this.form.value.repeat
+    let condition: Number = Math.floor( msDays / (1000 * 60 * 60 * 24 ) / periodo + 1)
+    console.log(condition)
+    
+    for(let i =0; i< condition; i++){
+      
+      let date = new Date(currentDate)
+      this.form.patchValue({start: currentDate})
+      this.events.push(this.form.value)
+      let newDate: any = date.setDate(date.getDate()+periodo)
+       newDate = new Date(newDate)
+       currentDate = newDate
+       console.log(this.events)
+      }
+
+      this.form.patchValue({start: this.events[0].start})
+    }
+
+    togglebutton(event: any){
+      this.toggle = event
+    }
 }

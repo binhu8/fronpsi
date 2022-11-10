@@ -11,7 +11,7 @@ import { SignOutService } from 'src/app/services/sign-out/sign-out.service';
   styleUrls: ['./sign-out.component.scss']
 })
 export class SignOutComponent implements OnInit {
-
+  public error: any = {}
   public form: FormGroup = new FormGroup({
     nome: new FormControl('', Validators.required),
     sobrenome: new FormControl('', Validators.required),
@@ -20,6 +20,7 @@ export class SignOutComponent implements OnInit {
     dataNascimento: new FormControl('', Validators.required),
     email: new FormControl('', Validators.required),
     senha: new FormControl('', Validators.required),
+    valorConsultaPadrao: new FormControl('', Validators.required),
     endereco: new FormGroup({
       numero: new FormControl(''),
       cep:  new FormControl(''),
@@ -46,14 +47,15 @@ export class SignOutComponent implements OnInit {
 
       res.numero = this.form.value.endereco.numero;
       res.complemento = this.form.value.endereco.complemento;
-      this.form.value.endereco = res
+      this.form.patchValue({endereco: res})
 
     });
   }
 
   public addNewUser(): void {
         this.signOutService.addNewUser(this.form.value).subscribe(res => {
-            this.router.navigate(['login'])
+            res.error ? this.error = res : this.router.navigate(['login'])
+            
         })
   }
 }

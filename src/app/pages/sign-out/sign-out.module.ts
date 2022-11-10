@@ -6,7 +6,7 @@ import { SignOutComponent } from './sign-out.component';
 import {MatStepperModule} from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { NgxMaskModule } from 'ngx-mask';
 
@@ -26,7 +26,8 @@ import { NgxMaskModule } from 'ngx-mask';
     MatInputModule,
     ReactiveFormsModule,
     MatButtonModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    FormsModule
   ]
 })
 export class SignOutModule { }

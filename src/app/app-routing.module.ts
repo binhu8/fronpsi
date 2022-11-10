@@ -40,6 +40,7 @@ const routes: Routes = [
     { path: 'minhas-financas', loadChildren: () => import('./pages/minhas-financas/minhas-financas.module').then(m => m.MinhasFinancasModule) },
     { path: 'configuracoes', loadChildren: () => import('./pages/config/config.module').then(m => m.ConfigModule) },
     { path: 'loading', loadChildren: () => import('./core/loading/loading.module').then(m => m.LoadingModule) },
+    { path: 'meus-clientes/cliente/:id', loadChildren: () => import('./pages/perfil-cliente/perfil-cliente.module').then(m => m.PerfilClienteModule) },
   ]
 
 @NgModule({

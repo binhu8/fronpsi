@@ -16,3 +16,15 @@ p{
         }
     }
 }
+
+.pass{
+    position: relative;
+}
+
+.passVisibility{
+    position: absolute;
+    right: 10px;
+    top: 7px;
+    cursor: pointer;
+}
+

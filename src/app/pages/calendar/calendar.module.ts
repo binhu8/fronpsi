@@ -12,6 +12,7 @@ import { ProfileModule } from 'src/app/components/profile/profile.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
+
 FullCalendarModule.registerPlugins([
   dayGridPlugin
 ])
@@ -27,7 +28,8 @@ FullCalendarModule.registerPlugins([
     AddEventModule,
     MenuModule,
     ProfileModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+
       
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]

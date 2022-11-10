@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfiguracoesComponent } from './components/configuracoes/configuracoes.component';
 import {MatDividerModule} from '@angular/material/divider';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -28,7 +29,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ReactiveFormsModule,
     FormsModule,
     MatDividerModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MatInputModule,
+    MatIconModule
   ]
 })
 export class ConfigModule { }

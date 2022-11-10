@@ -1,16 +1,20 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-
+import { PerfilClienteRoutingModule } from './perfil-cliente-routing.module';
 import { PerfilClienteComponent } from './perfil-cliente.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { MenuModule } from '../menu/menu.module';
+import { MenuModule } from 'src/app/components/menu/menu.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatTableModule} from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
 import { NgxMaskModule } from 'ngx-mask';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { TabsModule } from './tabs/tabs.module';
 
 
 @NgModule({
@@ -19,6 +23,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
   ],
   imports: [
     CommonModule,
+    PerfilClienteRoutingModule,
     FontAwesomeModule,
     MenuModule,
     MatFormFieldModule,
@@ -27,11 +32,11 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatTableModule,
     FormsModule,
     NgxMaskModule.forRoot(),
-    MatCheckboxModule
-  ],
-  exports:[
-    PerfilClienteComponent
-  ],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA]
+    MatCheckboxModule,
+    MatIconModule,
+    MatDividerModule,
+    MatButtonModule,
+    TabsModule
+  ]
 })
 export class PerfilClienteModule { }

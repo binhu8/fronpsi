@@ -13,6 +13,9 @@ export class ConfiguracoesComponent implements OnInit {
   @Input() data: any
   readonly: boolean = true
   faLocker = faLock
+  type: string = 'password'
+  visibility: string = 'visibility'
+  isVisibility: boolean = false
 
   constructor(private userDataService: UserDataService, private cepService: CepService) { }
 
@@ -34,6 +37,18 @@ export class ConfiguracoesComponent implements OnInit {
     this.cepService.getCep(newCep).subscribe(res => {
       this.data.endereco = res
     })
+  }
+
+  changeVisibility(){
+    this.isVisibility = !this.isVisibility
+
+    if(this.isVisibility){
+      this.visibility = 'visibility_off'
+      this.type = 'text'
+    }else{
+      this.visibility = 'visibility'
+      this.type = 'password'
+    }
   }
 
 }

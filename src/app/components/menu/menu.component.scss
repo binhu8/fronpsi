@@ -64,3 +64,42 @@ section{
     }
 }
 
+@media screen  and(max-width: 1000px){
+    section{
+        width: 100vw; 
+        height: 15vh;
+        display: flex;
+        flex-direction: row;
+        overflow: hidden;
+        align-items: center;
+
+        .header{
+            padding: 0;
+        }
+
+        ul{
+            display: flex;
+            flex-direction: row;
+
+            li{
+                text-align: center;
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                justify-content: center;
+                padding: 0.3rem;
+                margin: 0 5px;
+
+            }
+        }
+
+        button{
+            position: relative;
+            display: block;
+            width: 200px;
+            border-radius: 10px;
+        }
+    }
+
+    
+}

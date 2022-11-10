@@ -5,7 +5,7 @@ export interface Cliente {
     cpf: string;
     dataNascimento: string;
     telefone: string;
-    contatoEmergencia: string;
+    contatoEmergencia: Object;
     email: string;
     endereco: Endereco;
     crp: String;
