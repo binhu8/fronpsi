@@ -89,6 +89,7 @@ export class MeusClientesComponent implements OnInit {
     })
 
     this.clipboardCopy = `https://psimanager.netlify.app/cadastro-cliente/` + this.crp
+    // this.clipboardCopy = `http://localhost:4200/cadastro-cliente/` + this.crp
 
     this.verificaNovosClientes()
     this.ptBr()

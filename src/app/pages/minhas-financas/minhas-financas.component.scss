@@ -1,41 +1,33 @@
 section{
-    width: 100%;
+    max-width: 100vw;
+    height: 100vh;
     display: flex;
 
     .container-full{
-        width: 100%;
-        height: 100%;
-
-        .container{
-            padding: 1rem;
-
-            .row:first-child{
-                width: 100%;
-                display: flex;
-                justify-content: center;
-                margin-bottom: 2rem ;
-
-                .col-auto{
-                    display: flex;
-                    align-items: center;
-
-                    h1{
-                        padding: 0;
-                        margin: 0 1rem;
-                    }
-
-                }
-            }
-            .container-table{
-                table{
-                    width: 100%;
-                }
-            }
-        }
-
+        width: 85vw;
+        height: 100vh;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
-
 }
+
+.money{
+    align-items: center;
+    mat-icon{
+        color: rgb(0, 185, 0);
+    }
+}
+
+
+.maior{
+    color: #1aa81a;
+}
+
+.menor{
+    color: #f36262;
+}
+
+
 
 @media screen  and(max-width: 1000px){
     section{

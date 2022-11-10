@@ -15,16 +15,16 @@ export class LoadingInterceptor implements HttpInterceptor {
   constructor( private loadingService: LoadingService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    if(this.activeRequests === 0){
-      this.loadingService.show()
-      console.log('passei por aqui também')
-    }
-    this.activeRequests ++
-    return next.handle(request).pipe(
-      finalize(()=> {
-        this.loadingService.hide()
-      })
-    )
+    // if(this.activeRequests === 0){
+    //   this.loadingService.show()
+    //   console.log('passei por aqui também')
+    // }
+    // this.activeRequests ++
+    // finalize(()=> {
+    //   this.loadingService.hide()
+    // })
+    // )
+    return next.handle(request)
   }
 }
 

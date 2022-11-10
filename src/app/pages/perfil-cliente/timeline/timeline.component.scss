@@ -1,4 +1,8 @@
-.date{
+
+section{
+    width: 100vw;
+    height: 100vh;
+
     
 }
 span{
@@ -14,6 +18,13 @@ span{
     }
 }
 
+.pago{
+    color: #1aa81a;
+}
+.devedor{
+    color: #f36262;
+}
+
 mat-form-field{
     width: 100%;
 
@@ -21,3 +32,9 @@ mat-form-field{
         height: auto;
     }
 }
+
+
+
+// .mat-expansion-panel-header-description{
+//     justify-content: space-between;
+// }

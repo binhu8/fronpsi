@@ -13,7 +13,7 @@ export class TimelineComponent implements OnInit {
   @ViewChild('textarea' ) el!: ElementRef<TimelineComponent>
   @Input() dataSource:any[]  = []
 
-  rows = 5
+  
   constructor(
     private eventService: EventService
   ) { }
@@ -34,8 +34,10 @@ export class TimelineComponent implements OnInit {
    
   }
 
- teste(textarea:any){
-  console.log(textarea)
- }
+  deleteEvent(id: any){
+    this.eventService.deletEvent(id).subscribe(res => {
+      this.dataSource = this.dataSource.filter(it => it._id != id)
+    })
+  }
 
 }

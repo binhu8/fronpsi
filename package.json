@@ -31,6 +31,7 @@
     "@fullcalendar/interaction": "^5.11.3",
     "@fullcalendar/timegrid": "^5.11.3",
     "bootstrap": "^5.2.0",
+    "chart.js": "^3.9.1",
     "dom-to-image": "^2.6.0",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",

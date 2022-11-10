@@ -1,9 +1,9 @@
 <div class="container p-2">
     <mat-accordion>
-        <mat-expansion-panel *ngFor="let element of dataSource">
+        <mat-expansion-panel *ngFor="let element of dataSource" >
             <mat-expansion-panel-header>
                 <mat-panel-title>
-                    <div class="date me-5">
+                    <div class="date me-5" style="width: 250px;">
                         <span>
                             <mat-icon>event</mat-icon>
                             {{element.data}} às {{element.time}}
@@ -11,24 +11,41 @@
                     </div>
                 </mat-panel-title>
                 <mat-panel-description>
-                    <div class="payment me-4" style="z-index: 100;">
-                        <span>
-                            <mat-checkbox (change)="updateEvent(element)" [(ngModel)]="element.pago">Pagamento Realizado</mat-checkbox>
-                            <mat-icon>payments</mat-icon>
+                    <div style="width: 250px ;">
+                        <span class="me-4" [ngClass]="element.pago ? 'pago': 'devedor' ">
+                            {{element.pago ? 'Pagamento já Realizado' : 'Pagamento ainda não realizado'}}
                         </span>
                     </div>
-                    <div class="accomplished">
-                        <span>
-                            <mat-checkbox (change)="updateEvent(element)" [(ngModel)]="element.realizado">Consulta Realizada</mat-checkbox>
-                            <mat-icon>done</mat-icon>
-                        </span>
+                    <div style="width: 250px ;">
+                        <span [ngClass]="element.realizado ? 'pago': 'devedor' " >
+                            {{element.realizado ? 'Consulta já Realizada' : 'Consulta ainda não realizada'}}
+                        </span>    
                     </div>
                 </mat-panel-description>
             </mat-expansion-panel-header>
+            <div class="payment-accomplished d-flex  mb-3">
+                <div class="payment me-4" style="z-index: 100;">
+                    <span>
+                        <mat-checkbox (change)="updateEvent(element)" [(ngModel)]="element.pago">Pagamento Realizado</mat-checkbox>
+                        <mat-icon>payments</mat-icon>
+                    </span>
+                </div>
+                <div class="accomplished">
+                    <span>
+                        <mat-checkbox (change)="updateEvent(element)" [(ngModel)]="element.realizado">Consulta Realizada</mat-checkbox>
+                        <mat-icon>done</mat-icon>
+                    </span>
+                </div>
+           </div>
             <mat-form-field  appearance="outline">
                 <textarea #textarea (blur)="updateEvent(element)"  rows="20" [(ngModel)]="element.observacao" style="width: 100%; height: auto;"  oninput="if(this.scrollHeight > this.offsetHeight) this.rows ++" matInput ></textarea>
                 <mat-label>Observações da consulta</mat-label>
-            </mat-form-field> 
+            </mat-form-field>
+            <mat-action-row>
+                <button (click)="deleteEvent(element._id)" mat-raised-button color="warn">
+                    Excluir
+                </button>
+            </mat-action-row> 
         </mat-expansion-panel>
     </mat-accordion>
 </div>

@@ -10,11 +10,11 @@ import { ClienteService } from 'src/app/services/cliente/cliente.service';
   styleUrls: ['./cadastro-cliente.component.scss']
 })
 export class CadastroClienteComponent implements OnInit {
-
+  public crpResponsavel: string | null = ''
   public teste = ''
   public form: FormGroup = new FormGroup({
     nome: new FormControl('', Validators.required),
-    crpResponsavel: new FormControl('', Validators.required),
+    crpResponsavel: new FormControl('',),
     cpf: new FormControl('', Validators.required), 
     dataNascimento: new FormControl('', Validators.required), 
     telefone: new FormControl('', Validators.required), 
@@ -24,13 +24,13 @@ export class CadastroClienteComponent implements OnInit {
     }),
     email: new FormControl('', Validators.required), 
     endereco: new FormGroup({
-      cep: new FormControl(''),
-      logradouro: new FormControl(''),
-      numero: new FormControl(''),
+      cep: new FormControl('', Validators.required),
+      logradouro: new FormControl('', Validators.required),
+      numero: new FormControl('', Validators.required),
       complemento: new FormControl(''),
-      bairro: new FormControl(''),
-      localidade: new FormControl(''),
-      uf: new FormControl('')
+      bairro: new FormControl('',Validators.required),
+      localidade: new FormControl('',Validators.required),
+      uf: new FormControl('',Validators.required)
     })
   })
   constructor(
@@ -41,20 +41,24 @@ export class CadastroClienteComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.activatedRoute.params.subscribe(params => this.form.value.crpResponsavel = params['crp'])
+    this.crpResponsavel = this.activatedRoute.snapshot.paramMap.get('crp')
+    if(this.crpResponsavel != null) this.form.patchValue({crpResponsavel: this.crpResponsavel})
   }
 
   addCliente(): void{
+  
     this.clienteService.addCliente(this.form.value).subscribe(res => {
       this.router.navigate(['/obrigado'])
     })
   }
   
 
-  getEndereco(cep: String): void {
-    let newCep = cep.replace('-', '')
-    this.cepService.getCep(newCep).subscribe(res => {
-      this.form.value.endereco = res
+  getEndereco(): void {
+    console.log(this.form.value)
+    // let newCep = cep.replace('-', '')
+    this.cepService.getCep(this.form.value.endereco.cep).subscribe(res => {
+      console.log(res)
+      this.form.patchValue({endereco: res})
       console.log(this.form.value)
     })
   }
