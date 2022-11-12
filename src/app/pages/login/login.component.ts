@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
+import { LoadingService } from 'src/app/core/services/loading.service';
 import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
@@ -19,12 +20,16 @@ export class LoginComponent implements OnInit {
   });
   
   public faLock = faLock
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(
+    private loginService: LoginService, 
+    private router: Router,
+    private loadingSerive: LoadingService) { }
 
   ngOnInit(): void {
   }
 
   checkLogin(){
+    this.loadingSerive.show()
     this.loginService.checkUserLogin(this.form.value).subscribe(res => {
       if(res.error){
         this.error = res
@@ -35,6 +40,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('crp', res.crp)
         this.router.navigate(['/'])
       }
+      this.loadingSerive.hide()
     })
   }
 

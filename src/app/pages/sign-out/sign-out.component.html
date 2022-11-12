@@ -29,7 +29,7 @@
             <div class="col-6">
                 <mat-form-field appearance="outline">
                     <mat-label>CRP</mat-label>
-                    <input  type="text" matInput formControlName="crp" placeholder="Digite somente números">
+                    <input  type="text" matInput formControlName="crp" mask="00/0*" placeholder="Digite somente números">
                 </mat-form-field>
             </div>
         </div>
@@ -114,7 +114,7 @@
 
         <div class="row mt-3">
             <div class="col-12">
-                <button (click)="addNewUser()" [disabled]="!form.valid" style="width: 100%;" class="btn btn-outline-success">Cadastrar</button>
+                <button (click)="addNewUser()"  [disabled]="!form.valid" style="width: 100%;" class="btn btn-outline-success">Cadastrar</button>
             </div>
         </div>
     </div>

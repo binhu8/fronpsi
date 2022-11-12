@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LoadingService } from 'src/app/core/services/loading.service';
 import { CepService } from 'src/app/services/cep/cep.service';
 import { ClienteService } from 'src/app/services/cliente/cliente.service';
 
@@ -37,7 +38,8 @@ export class CadastroClienteComponent implements OnInit {
     private clienteService: ClienteService, 
     private cepService: CepService, 
     private activatedRoute: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private loadingService: LoadingService) { }
 
   ngOnInit(): void {
 
@@ -46,15 +48,16 @@ export class CadastroClienteComponent implements OnInit {
   }
 
   addCliente(): void{
-  
+    this.loadingService.show()
     this.clienteService.addCliente(this.form.value).subscribe(res => {
       this.router.navigate(['/obrigado'])
+      this.loadingService.hide()
     })
   }
   
 
   getEndereco(): void {
-    console.log(this.form.value)
+    
     // let newCep = cep.replace('-', '')
     this.cepService.getCep(this.form.value.endereco.cep).subscribe(res => {
       console.log(res)

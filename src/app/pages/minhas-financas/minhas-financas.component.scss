@@ -1,33 +1,49 @@
 section{
-    max-width: 100vw;
-    height: 100vh;
     display: flex;
+    width: 100vw;
+    height: 100vh;
+}
 
-    .container-full{
-        width: 85vw;
-        height: 100vh;
-        overflow-y: auto;
-        overflow-x: hidden;
+.container-full{
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.cards{
+    h1{
+        display: flex;
+        align-items: center;
+        margin-right: 2rem;
+        mat-icon{
+            margin-right: 10px ;
+        }
     }
 }
 
-.money{
+canvas{
+    width: 100%;
+}
+
+.chart{
+    width: 100%;
+}
+
+.percent{
+    border: 1px solid gray;
+    border-radius: 20px;
+    display: flex;
     align-items: center;
+    padding: 0 15px;
+    h4{
+        font-size: 13px;
+    }
     mat-icon{
-        color: rgb(0, 185, 0);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
     }
 }
-
-
-.maior{
-    color: #1aa81a;
-}
-
-.menor{
-    color: #f36262;
-}
-
-
 
 @media screen  and(max-width: 1000px){
     section{

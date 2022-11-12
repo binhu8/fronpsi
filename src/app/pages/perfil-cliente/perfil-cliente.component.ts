@@ -120,10 +120,11 @@ export class PerfilClienteComponent implements OnInit {
   }
 
   getEvents(){
+    this.loadingService.show();
     this.eventService.getEventsClient(this.userData.cpf).subscribe(res => {
       console.log(this.userData.cpf)
       this.dataSource = res.filter((it: any) => it.mes == this.month && it.ano == this.year)
-      console.log('datasource', res)
+      this.loadingService.hide();
     })
   }
 
@@ -134,11 +135,7 @@ export class PerfilClienteComponent implements OnInit {
   
 
 
-  deleteEvent(id: any){
-    this.eventService.deletEvent(id).subscribe(res => {
-      this.dataSource = this.dataSource.filter(it => it._id != id)
-    })
-  }
+ 
 
    printPDF(){
      this.showPdf = true

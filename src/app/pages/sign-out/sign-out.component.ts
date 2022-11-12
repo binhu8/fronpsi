@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoadingService } from 'src/app/core/services/loading.service';
 import { Endereco } from 'src/app/models/endereco';
 import { CepService } from 'src/app/services/cep/cep.service';
 import { SignOutService } from 'src/app/services/sign-out/sign-out.service';
@@ -35,12 +36,18 @@ export class SignOutComponent implements OnInit {
     
   })
 
-  constructor(private router: Router, private cepService: CepService, private signOutService: SignOutService) { }
+  constructor(
+    private router: Router, 
+    private cepService: CepService, 
+    private signOutService: SignOutService,
+    private loadingService: LoadingService
+    ) { }
 
   ngOnInit(): void {
   }
 
   public getEndereco(cep: any): void {
+    this.loadingService.show()
     let newCep = cep.replace('-', '').replace('.', '');
 
     this.cepService.getCep(newCep).subscribe((res: Endereco) => {
@@ -48,14 +55,17 @@ export class SignOutComponent implements OnInit {
       res.numero = this.form.value.endereco.numero;
       res.complemento = this.form.value.endereco.complemento;
       this.form.patchValue({endereco: res})
-
+      this.loadingService.hide()
     });
   }
 
   public addNewUser(): void {
-        this.signOutService.addNewUser(this.form.value).subscribe(res => {
-            res.error ? this.error = res : this.router.navigate(['login'])
-            
-        })
+    this.loadingService.show()
+    let crp = this.form.value.crp.slice('/')
+    this.form.patchValue({crp: crp})
+    this.signOutService.addNewUser(this.form.value).subscribe(res => {
+        res.error ? this.error = res : this.router.navigate(['login'])
+        this.loadingService.hide()
+    })
   }
 }

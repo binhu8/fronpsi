@@ -1,7 +1,25 @@
-<section class="p-3">
+<section class="p-3" >
     <mat-tab-group>
+        <div class="row">
+
+        </div>
         <mat-tab label="Consultas">
+            <div class="row m-0 p-0 mt-2 mb-2 justify-content-center">
+                <div class="col-auto">
+                    <button color="primary" (click)="getBeforeMonth()" mat-icon-button><mat-icon>arrow_left_ios</mat-icon></button>
+                    {{months[month]}} de {{year}}
+                    <button [disabled]="month >= atualMonth && year >= atualYear" color="primary" (click)="setAfterMonth()" mat-icon-button><mat-icon>arrow_right_ios</mat-icon></button>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
             <app-timeline [dataSource]="eventsClient"></app-timeline>
+            <div *ngIf="eventsClient.length <= 0">
+                <div class="row p-0 m-0 justify-content-center">
+                    <div class="col-auto">
+                        <h1>Ainda não há eventos para este mês</h1>
+                    </div>
+                </div>
+            </div>
         </mat-tab>
     </mat-tab-group>
 </section>

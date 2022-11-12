@@ -29,6 +29,7 @@ import {
   SubTitle
 } from 'chart.js';
 import { elementClosest } from '@fullcalendar/angular';
+import { LoadingService } from 'src/app/core/services/loading.service';
 
 Chart.register(
   ArcElement,
@@ -90,48 +91,16 @@ export class MinhasFinancasComponent implements OnInit {
    }
 
 
-  constructor(private eventService: EventService, private userDataService: UserDataService) { }
+  constructor(
+    private eventService: EventService, 
+    private userDataService: UserDataService,
+    private loadingService: LoadingService) { }
   @ViewChild('myChart', {static:true}) chart!: ElementRef 
   @ViewChild('chartYear', {static:true}) chartYear!: ElementRef 
 
   labelYear: any[] = []
   labels: any[] = []
-  data = {
-    labels: this.labels,
-    datasets: [{
-      data: [],
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(255, 159, 64, 0.2)',
-        'rgba(255, 205, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(201, 203, 207, 0.2)'
-      ],
-      borderColor: [
-        'rgb(255, 99, 132)',
-        'rgb(255, 159, 64)',
-        'rgb(255, 205, 86)',
-        'rgb(75, 192, 192)',
-        'rgb(54, 162, 235)',
-        'rgb(153, 102, 255)',
-        'rgb(201, 203, 207)'
-      ],
-      borderWidth: 1
-    }]
-  };
-  config: any ={
-    type: "bar",
-    data: this.data, 
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  }
+ 
   ngAfterViewInit(){
     
     
@@ -172,9 +141,10 @@ export class MinhasFinancasComponent implements OnInit {
     this.total = 0
     this.labels = []
     this.values = []
+    this.loadingService.show()
     let crp = this.userDataService.getUserCRP()
     this.eventService.getEvents(crp ).subscribe(res => {
-      let response = res.filter((element: any) => element.mes == this.month && element.ano == this.year && element.realizado && element.pago);
+      let response = res.filter((element: any) => element.mes == this.month && element.ano == this.year && element.pago);
       
       
       response.forEach((element: any) => {
@@ -187,8 +157,6 @@ export class MinhasFinancasComponent implements OnInit {
         
       })
 
-      console.log(this.dataSource, 'data -> ')
-
       this.getInvoicingBeforeMonth(res)
 
       new Chart(this.chart.nativeElement, {
@@ -199,37 +167,48 @@ export class MinhasFinancasComponent implements OnInit {
             label: 'R$',
             data: this.values,
             backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
-              'rgba(255, 159, 64, 0.2)',
-              'rgba(255, 205, 86, 0.2)',
-              'rgba(75, 192, 192, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(153, 102, 255, 0.2)',
-              'rgba(201, 203, 207, 0.2)'
-            ],
-            borderColor: [
-              'rgb(255, 99, 132)',
-              'rgb(255, 159, 64)',
-              'rgb(255, 205, 86)',
-              'rgb(75, 192, 192)',
-              'rgb(54, 162, 235)',
-              'rgb(153, 102, 255)',
-              'rgb(201, 203, 207)'
+              '#53cfda',
+              '#eff2e6',
+              '#ff7994',
+              '#ffc900',
+              '#ffed00',
+              '#ff8860',
+              '#f7d635',
+              '#d6e8d9',
+              '#f1c9c2',
+              '#1f3d51',
+              '#ff3747',
+              '#ff8b0f',
+              '#ffd600',
+              '#eae45f',
+              '#ddf5c2',
+              '#ff458f',
+              '#ff8352',
+              '#dee500',
+              '#00e1df',
+              '#00c3af',
+              '#ecf7dd',
+              '#4fcbbb',
+              '#2494cc',
+              '#ef39a7',
+              '#ffae90'
             ],
             borderWidth: 1
           }]
         }
       })
+      this.loadingService.hide()
     })
   }
 
   getEventYear(){
+    this.loadingService.show()
     let crp = this.userDataService.getUserCRP()
     this.eventService.getEvents(crp).subscribe(res => {
       res.forEach((element: any) => {
         element.ano = Number(element.ano)
-        console.log(element.mes)
       })
+      this.loadingService.hide()
     })
 
   }
@@ -240,8 +219,8 @@ export class MinhasFinancasComponent implements OnInit {
     data.forEach((element: any) => {
       element.mes = Number(element.mes)
       element.valorConsulta = Number(element.valorConsulta)
-      if(element.mes == this.month -1) this.ivoicingBeforeMonth += element.valorConsulta
-      if(element.mes == this.month) this.invoicingAtualMonthPercent += element.valorConsulta
+      if(element.mes == this.month -1 && element.pago) this.ivoicingBeforeMonth += element.valorConsulta
+      if(element.mes == this.month && element.pago) this.invoicingAtualMonthPercent += element.valorConsulta
       if(this.ivoicingBeforeMonth <= 0){
         this.atualMonthPercent = 100
       }else{
