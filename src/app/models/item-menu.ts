@@ -1,7 +1,7 @@
 import { IconDefinition } from "@fortawesome/free-regular-svg-icons";
 
 export interface ItemMenu {
-    fasIcon: IconDefinition,
+    icon: string,
     name: String,
     routerLink: any
 }

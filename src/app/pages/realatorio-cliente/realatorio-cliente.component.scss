@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@800&family=Oswald:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600&family=Sono:wght@400;500;700&display=swap');
+
+*{
+    font-family: 'Oswald';
+}
+section{
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow-y: auto;
+
+    .pdf-container{
+        width: 100%;
+        padding: 0 1rem;
+        position: relative;
+
+        .ticket{
+            width: 90px;
+            height: 10px;
+            background: linear-gradient(to top left, #656578, #434a54);
+        }
+
+        .top-info-container{
+            .left{
+                .row{
+                    .col-auto{
+                        color: #434a54;
+                        h2{
+                            font-family: 'Oswald';
+                            font-weight: 600;
+                            font-size: 1rem;
+                        }
+                        p{
+                            font-family: 'Oswald';
+                            color: #656578;
+                        }
+                    }
+                }
+            }
+            .contatos{
+                h2{
+                    margin: 0;
+                    padding: 0;
+                    font-family: 'Oswald';
+                    color: #434a54;
+                    font-size: 0.8rem;
+                }
+                p{
+                    font-size: 0.7rem;
+                    color: #656578;
+                }
+            }
+
+        }
+
+        .table-container{
+            .thead{
+                .row{
+                    background: #434a54;
+                    color: #fff;
+                    padding: 0.5rem;
+                    font-size: 0.7rem;
+                }
+            }
+            .tbody{
+                .row{
+                    padding: 0.5rem;
+                    color: #656578;
+                    font-size: 0.7rem;
+                }
+                .row:nth-child(even){
+                    background: #a6a6b30e;
+                }
+            }
+        }
+
+        .total{
+            .col-2, .col-auto{
+                padding: 0.5rem;
+                background: #434a54;
+                color: #fafafa;
+            }
+        }
+        
+    }
+    
+    .qrcode-container{
+        width: 100%;
+        padding: 1rem;
+        background-color: #434a54;
+        
+
+        .qrcode-img{
+            width: 150px;
+            height: 150px;
+            background-color: #fff;
+
+            img{
+                width: 100%;
+            }
+        }
+        .copia-cola{
+            width: 100%;
+            padding: 0 1rem;
+            box-sizing: border-box;
+            background-color: #fff;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            word-break: break-all;
+
+            p{
+                cursor: pointer;
+            }
+        }
+    }
+    
+        
+}

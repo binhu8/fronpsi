@@ -8,6 +8,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import {  MatButtonModule } from '@angular/material/button';
+import { TimelineFinancasModule } from './timeline-financas/timeline-financas.module';
+
 
 
 @NgModule({
@@ -21,7 +23,8 @@ import {  MatButtonModule } from '@angular/material/button';
     MatTableModule,
     MatDividerModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    TimelineFinancasModule
   ]
 })
 export class MinhasFinancasModule { }

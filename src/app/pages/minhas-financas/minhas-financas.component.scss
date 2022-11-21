@@ -20,13 +20,7 @@ section{
     }
 }
 
-canvas{
-    width: 100%;
-}
 
-.chart{
-    width: 100%;
-}
 
 .percent{
     border: 1px solid gray;
@@ -45,13 +39,12 @@ canvas{
     }
 }
 
-@media screen  and(max-width: 1000px){
+@media screen  and(max-width: 1300px){
     section{
-        height: 100vh;
-        flex-direction: column-reverse;
+        
 
         .container-full{
-            height: 90%;
+            height: 100%;
             width: 100vw;
         }
     }

@@ -10,9 +10,7 @@ section{
     
 }
 
-.side-menu{
-    width: 15vw;
-}
+
 
 .container-full{
     width: 85vw;
@@ -92,5 +90,14 @@ section{
     
             box-shadow: 0px 0px 3px 3px rgba(242, 242, 242, 0.39);
         }
+    }
+}
+
+@media screen and(max-width: 1300px){
+    .col-auto{
+        margin: 5px 0;
+    }
+    .container-full{
+        width: 100%;
     }
 }

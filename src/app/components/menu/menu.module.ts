@@ -5,6 +5,8 @@ import { MenuComponent } from './menu.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterModule } from '@angular/router';
 import { ProfileModule } from '../profile/profile.module';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { ProfileModule } from '../profile/profile.module';
     CommonModule,
     FontAwesomeModule,
     RouterModule,
-    ProfileModule
+    ProfileModule,
+    MatDividerModule,
+    MatIconModule
   ],
   exports: [
     MenuComponent

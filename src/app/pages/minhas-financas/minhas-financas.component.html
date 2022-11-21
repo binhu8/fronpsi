@@ -50,13 +50,13 @@
       </div>
     </div>
 
-    <div class="row chart mt-3">
-      <div class="col-12 ">
-        <canvas #myChart></canvas>
-      </div>
+    <div class="card p-3 mt-3" >
+      <canvas #myChart ></canvas>
     </div>
-    
+
+    <app-timeline-financas [dataSource]="dataSourceTimeline"></app-timeline-financas>
   </div>
+
 </section>
 
 <!-- <section>

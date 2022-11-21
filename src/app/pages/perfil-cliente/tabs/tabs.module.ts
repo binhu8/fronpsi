@@ -7,6 +7,8 @@ import { TimelineModule } from '../timeline/timeline.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
+import { CobrancasModule } from '../cobrancas/cobrancas.module';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -19,8 +21,9 @@ import { MatDividerModule } from '@angular/material/divider';
     TimelineModule,
     MatButtonModule,
     MatIconModule,
-    MatDividerModule
-
+    MatDividerModule,
+    CobrancasModule,
+    RouterModule
   ],
   exports: [
     TabsComponent

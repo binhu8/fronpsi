@@ -126,7 +126,6 @@ export class MeusClientesComponent implements OnInit {
   agendarConsulta(cliente: any): void{
     this.showModal = true;
     this.cliente = cliente
-    console.log(cliente.nome, this.cliente)
   }
 
   verPerfil(cliente: any){

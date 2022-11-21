@@ -1,5 +1,15 @@
-
 <section>
+    <app-profile></app-profile>
+    <div class="items-menu-container">
+        <div routerLinkActive="active" [routerLink]="item.routerLink" *ngFor="let item of itensMenu" class="item">
+            <mat-icon>{{item.icon}}</mat-icon> <p class="p-0 m-0">{{item.name}}</p>
+        </div>
+    </div>
+    <button (click)="logout()" class="btn btn-danger">Sair</button>
+</section>
+
+
+<!-- <section>
     <div class="header">
         <app-profile></app-profile>
     </div>
@@ -11,5 +21,5 @@
     </ul>
 
     <button (click)="logout()" class="btn btn-danger">Sair</button>
-</section>
+</section> -->
 

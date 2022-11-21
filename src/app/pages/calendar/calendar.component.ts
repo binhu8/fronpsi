@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { Calendar, CalendarOptions } from '@fullcalendar/angular';
 import ptBr from '@fullcalendar/core/locales/pt-br'
 import bootstrap5Plugin from '@fullcalendar/bootstrap5'
-import { Router, RouterLink } from '@angular/router';
+import { ChildActivationStart, Router, RouterLink } from '@angular/router';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import { EventService } from 'src/app/services/event/event.service';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -16,14 +16,43 @@ import * as moment from 'moment'
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss']
 })
-export class CalendarComponent implements OnInit {
 
-  public faClose = faCircleXmark
-  public showModal: boolean = false;
-  
+
+export class CalendarComponent implements OnInit {
+  showModalEvent: boolean =false
+
+  @HostListener('document:click', ['$event.target']) clickout(target: any){
+    if(this.el?.nativeElement.contains(target)){
+      console.log('clicou no elemento')
+      return
+    }else{
+      if(target.classList.contains('fc-event-time') || target.classList.contains('fc-event-title') ){
+        this.showModal = false
+        return
+      }else{
+        console.log(target)
+        this.showModalEvent = false
+      }
+    } 
+  }
+
+  @HostListener('scroll', ['$event']) scrollWindow(event: any){
+    this.showModalEvent = false
+  }
+
+  @ViewChild('teste', {static: false} ) set content(content: ElementRef){
+    if(content){
+      this.el = content
+      this.testeEventclick(this.event)
+    }
+  }
+  el!: ElementRef
+  faClose = faCircleXmark
+  showModal: boolean = false;
+  event: any = {}
 
  
-  public form: FormGroup = new FormGroup({
+  form: FormGroup = new FormGroup({
     // date: new FormControl('', Validators.required),
     _id: new FormControl(''),
     time: new FormControl('', Validators.required),
@@ -44,10 +73,18 @@ export class CalendarComponent implements OnInit {
   })
   
 
-  public calendarOptions: CalendarOptions = {
+   calendarOptions: CalendarOptions = {
         
-    eventClick: function(info){
-      window.location.replace( info.event._def.extendedProps.meet)
+    eventClick: info => {
+      // window.location.replace( info.event._def.extendedProps.meet)
+      if(this.showModalEvent){
+        this.showModalEvent = false
+        this.testeEventclick(info)
+        this.event = info
+      }else{
+        this.showModalEvent = true
+        this.event = info
+      }
     }, 
     eventMouseLeave: function(info){
       
@@ -58,8 +95,8 @@ export class CalendarComponent implements OnInit {
     eventResize: arg => {
       this.updateEventService(arg)
     },
-    dateClick: function(info) {
-      console.log(info)
+    dateClick: info => {
+      
     },
     navLinks: true,
     nowIndicator: true,
@@ -97,6 +134,8 @@ export class CalendarComponent implements OnInit {
     
   }
 
+ 
+
 
   constructor( 
       private router: Router, 
@@ -106,10 +145,19 @@ export class CalendarComponent implements OnInit {
   ngOnInit(): void {
     this.eventService.getEvents(localStorage.getItem('crp')).subscribe(res => {
        this.calendarOptions.events = res
-      console.log('response ->', res)
     })
+
   }
 
+
+  testeEventclick(element: any){
+    this.showModalEvent = true
+    this.el.nativeElement.style.top = `${element.jsEvent.y -110 }px`
+    this.el.nativeElement.style.left = `${element.jsEvent.x -100}px`
+    this.form.patchValue({title: this.event.event._def.title})
+    this.form.patchValue(this.event.event._def.extendedProps)
+    console.log(this.form.value)
+  }
   updateEventService(arg: any){
     let start = arg.event.startStr
     let end  = arg.event.endStr 
@@ -132,6 +180,12 @@ export class CalendarComponent implements OnInit {
     this.form.patchValue({time: time})
     this.eventService.updateEvent(this.form.value).subscribe(res => {
       
+    })
+  }
+
+  deleteEvent(id: any){
+    this.eventService.deletEvent(id).subscribe(res => {
+      window.location.reload()
     })
   }
 }

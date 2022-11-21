@@ -1,4 +1,10 @@
-<section class="container-full">
-    <h1>{{response.nome}} {{response.sobrenome}}</h1>
-    <span>CRP: {{response.crp}}</span>
+<section>
+    <div class="initial-name-container">
+        <div class="initial-name-background">
+            <h2 class="p-0 m-0">{{response.nome[0]}}</h2>
+        </div>
+    </div>
+    <div class="name">
+        <p class="p-0 m-0">{{response.nome}}</p>
+    </div>
 </section>

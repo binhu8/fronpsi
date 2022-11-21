@@ -10,6 +10,8 @@ import { AddEventModule } from '../add-event/add-event.module';
 import { MenuModule } from 'src/app/components/menu/menu.module';
 import { ProfileModule } from 'src/app/components/profile/profile.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { InputSearchModule } from './input-search/input-search.module';
+import { MatButtonModule } from '@angular/material/button';
 
 
 
@@ -29,8 +31,9 @@ FullCalendarModule.registerPlugins([
     MenuModule,
     ProfileModule,
     FontAwesomeModule,
+    InputSearchModule,
+    MatButtonModule
 
-      
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -65,6 +65,7 @@ Chart.register(
 })
 export class MinhasFinancasComponent implements OnInit {
 
+  public dataSourceTimeline: any[] = []
   public atualMonthPercent: number   = 0 
   public invoicingAtualMonthPercent: number  = 0
   public ivoicingBeforeMonth: number  = 0
@@ -145,8 +146,7 @@ export class MinhasFinancasComponent implements OnInit {
     let crp = this.userDataService.getUserCRP()
     this.eventService.getEvents(crp ).subscribe(res => {
       let response = res.filter((element: any) => element.mes == this.month && element.ano == this.year && element.pago);
-      
-      
+      this.dataSourceTimeline = res.filter((element: any) => element.mes == this.month && element.ano == this.year);
       response.forEach((element: any) => {
         this.total += parseInt(element.valorConsulta)
       })
@@ -161,39 +161,18 @@ export class MinhasFinancasComponent implements OnInit {
 
       new Chart(this.chart.nativeElement, {
         type: 'bar',
+        options: {
+          // responsive: false
+        },
         data: {
           labels: this.labels,
           datasets: [{
+          
             label: 'R$',
             data: this.values,
-            backgroundColor: [
-              '#53cfda',
-              '#eff2e6',
-              '#ff7994',
-              '#ffc900',
-              '#ffed00',
-              '#ff8860',
-              '#f7d635',
-              '#d6e8d9',
-              '#f1c9c2',
-              '#1f3d51',
-              '#ff3747',
-              '#ff8b0f',
-              '#ffd600',
-              '#eae45f',
-              '#ddf5c2',
-              '#ff458f',
-              '#ff8352',
-              '#dee500',
-              '#00e1df',
-              '#00c3af',
-              '#ecf7dd',
-              '#4fcbbb',
-              '#2494cc',
-              '#ef39a7',
-              '#ffae90'
-            ],
-            borderWidth: 1
+            backgroundColor: ['#1f3d51' ],
+            borderWidth: 1,
+            
           }]
         }
       })

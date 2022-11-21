@@ -22,8 +22,9 @@ export class TabsComponent implements OnInit {
 
   
   @Input() cliente: any = {};
-  @ViewChild('print-pdf', {static: false}) el!: ElementRef
+  @ViewChild('printpdf' ) el!: ElementRef
 
+  dataEvents: any[] = []
   displayedColumns: any[] = [ 'data', 'time', 'valorConsulta','realizado', 'pago', 'deletar'];
   dataSource: any[] = []
   mesNascimento: any = ''
@@ -48,6 +49,8 @@ export class TabsComponent implements OnInit {
     pago: 'Pagamento',
     observacao: 'Observação',
    }
+
+   urlCliente: string = ''
 
    public months: any = {
     1: 'Janeiro',
@@ -74,6 +77,7 @@ export class TabsComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    this.urlCliente = `https://psimanager.netlify.app/relatorio/${this.cliente._id}/${this.cliente.crpResponsavel}/${this.month}/${this.year}`
     const id = this.activatedRoute.snapshot.paramMap.get('id')
     console.log('toma id', id)
     this.userData = this.userDataService.getUserData()
@@ -110,6 +114,7 @@ export class TabsComponent implements OnInit {
       this.month = 12;
       this.year --
     }
+    this.urlCliente = `https://psimanager.netlify.app/relatorio/${this.cliente._id}/${this.cliente.crpResponsavel}/${this.month}/${this.year}`
     this.getEvents()
   }
   setAfterMonth(): void{
@@ -118,6 +123,7 @@ export class TabsComponent implements OnInit {
       this.month = 1;
       this.year ++
     }
+    this.urlCliente = `https://psimanager.netlify.app/relatorio/${this.cliente._id}/${this.cliente.crpResponsavel}/${this.month}/${this.year}`
     this.getEvents()
   }
 
@@ -126,6 +132,7 @@ export class TabsComponent implements OnInit {
     this.eventService.getEventsClient(this.userData.cpf).subscribe(res => {
       console.log(this.userData.cpf)
       this.eventsClient = res.filter((it: any) => it.mes == this.month && it.ano == this.year)
+      this.dataEvents = res
       this.loadingService.hide();
     })
   }
@@ -139,12 +146,10 @@ export class TabsComponent implements OnInit {
 
  
 
-   printPDF(){
-     this.showPdf = true
-    
-     setTimeout(() => {
+   printPDF(){    
+     console.log(this.el, 'element')
       let doc: any =   document.querySelector('.folha')
-      html2canvas(doc).then(canvas => {
+      html2canvas(this.el.nativeElement).then(canvas => {
         let pdf = new jsPDF('p')
        
         let imgData = canvas.toDataURL('image/png')
@@ -157,7 +162,6 @@ export class TabsComponent implements OnInit {
         pdf.save(`${this.cliente.nome}_${this.month}_${this.year}.pdf`);
         this.showPdf = false
       })
-     }, 500);
     
   }
 
@@ -177,6 +181,13 @@ export class TabsComponent implements OnInit {
     this.clienteService.updateCliente(this.cliente).subscribe(res => {
       
     })
+  }
+
+  replyWhatsapp(){
+    window.open(`https://wa.me/55${this.cliente.telefone}?text=Olá ${this.cliente.nome}, estou te enviando,
+    seu relatório das consultas realizadas em ${this.months[this.month]} de ${this.year}.
+    Para qualquer dúvida estou a disposição. 
+    ${this.urlCliente}`, '_blank')
   }
 
 }

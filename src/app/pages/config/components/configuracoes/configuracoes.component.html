@@ -41,6 +41,12 @@
                 <input [readonly]="true" [(ngModel)]="data.crp" mask="00/0*" type="text" matInput>
             </mat-form-field>
         </div>
+        <div class="col-auto">
+            <mat-form-field appearance="outline">
+                <mat-label>Chave Pix</mat-label>
+                <input [readonly]="readonly" [(ngModel)]="data.chavePix" type="text" matInput>
+            </mat-form-field>
+        </div>
     </div>
 
     <mat-divider class=" mb-5"></mat-divider>

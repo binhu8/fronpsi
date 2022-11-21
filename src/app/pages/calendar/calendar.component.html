@@ -1,4 +1,4 @@
-<div class="d-flex bg-dark">
+<div class="d-flex section">
     <nav class="side-menu">
         <app-menu></app-menu>
     </nav>
@@ -6,10 +6,25 @@
         
         <full-calendar [options]="calendarOptions"></full-calendar>
     </section>
-    <div class="modal-container" *ngIf="showModal">
-        <div class="close-modal">
-            <fa-icon [icon]="faClose"></fa-icon>
+    <div *ngIf="showModalEvent" #teste class=" event card p-2" >
+        <span class="text-secondary">{{form.value.data}} às {{form.value.time}}</span>
+        <div class="row mt-2">
+            <div class="col-auto">
+                <p class="text-success">Participante: <span class="text-primary">{{form.value.title}}</span></p>
+            </div>
         </div>
-        <app-add-event></app-add-event>
+        <div class="row">
+            <div class="col-auto">
+                <p class="text-success">Reunião link: <a [href]="form.value.meet">{{form.value.meet}}</a></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-auto">
+                <button (click)="showModalEvent = false" mat-button>Fechar</button>
+            </div>
+            <div class="col-auto">
+                <button (click)="deleteEvent(form.value._id)" mat-button color="warn">Excluir</button>
+            </div>
+        </div>
     </div>
 </div>

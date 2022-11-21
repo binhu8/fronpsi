@@ -41,6 +41,8 @@ const routes: Routes = [
     { path: 'configuracoes', loadChildren: () => import('./pages/config/config.module').then(m => m.ConfigModule) },
     { path: 'loading', loadChildren: () => import('./core/loading/loading.module').then(m => m.LoadingModule) },
     { path: 'meus-clientes/cliente/:id', loadChildren: () => import('./pages/perfil-cliente/perfil-cliente.module').then(m => m.PerfilClienteModule) },
+    { path: 'teste', loadChildren: () => import('./pages/perfil-cliente/cobrancas/cobrancas.module').then(m => m.CobrancasModule) },
+    { path: 'relatorio/:id/:crp/:mes/:ano', loadChildren: () => import('./pages/realatorio-cliente/realatorio-cliente.module').then(m => m.RealatorioClienteModule) },
   ]
 
 @NgModule({

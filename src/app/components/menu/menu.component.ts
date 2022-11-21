@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { faCalendar, faUser } from '@fortawesome/free-regular-svg-icons';
 import { faDollar, faGear, faPencil } from '@fortawesome/free-solid-svg-icons';
@@ -13,13 +15,13 @@ export class MenuComponent implements OnInit {
 
   public itensMenu: ItemMenu[] = [
     
-    {fasIcon: faCalendar, name: 'Agenda', routerLink: '/minha-agenda'},
-    {fasIcon: faUser, name: 'Meus Clientes', routerLink: '/meus-clientes'},
-    {fasIcon: faDollar, name: 'Minhas finanças', routerLink: '/minhas-financas'},
-    {fasIcon: faGear, name: 'Configurações', routerLink: '/configuracoes'},
+    {icon: 'event', name: 'Agenda', routerLink: '/minha-agenda'},
+    {icon: 'group', name: 'Meus Clientes', routerLink: '/meus-clientes'},
+    {icon: 'account_balance_wallet', name: 'Minhas finanças', routerLink: '/minhas-financas'},
+    {icon: 'manage_accounts', name: 'Configurações', routerLink: '/configuracoes'},
   ]
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
   }

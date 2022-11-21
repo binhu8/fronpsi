@@ -1,0 +1,140 @@
+<section>
+    <div class="pdf-container">
+        <div class="ticket"></div>
+        <div class="top-info-container">
+            <div class="left">
+                <div class="row">
+                    <div class="col-auto">
+                        <h2 class="m-0 p-0">{{cliente.nome}}</h2>
+                        <p class="m-0 p-0">CPF: {{cliente.cpf | mask: '000.000.000-00'}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="contatos">
+                <h2 class="mt-3">Contatos</h2>
+                <p class="p-0 m-0">Email: {{cliente.email}}</p>
+                <p class="p-0 m-0">Celular: {{cliente.telefone}}</p>
+            </div>
+        </div>
+
+        <div class="table-container mt-4">
+            <div class="thead">
+                <div class="row">
+                    <div class="col-3">
+                        <p class="p-0 m-0">Data</p>
+                    </div>
+                    <div class="col-3">
+                        <p class="p-0 m-0">Status</p>
+                    </div>
+                    <div class="col-3">
+                        <p class="p-0 m-0">Pagamento</p>
+                    </div>
+                    <div class="col-3">
+                        <p class="p-0 m-0">Valor</p>
+                    </div>
+                </div>
+            </div>
+            <div class="tbody">
+                <div *ngFor="let event of events" class="row">
+                    <div class="col-3">
+                        <p class="m-0 p-0">{{event.data}}</p>
+                    </div>
+                    <div class="col-3">
+                        <p *ngIf="event.realizado" class="m-0 p-0">Realizado</p>
+                        <p *ngIf="!event.realizado" class="m-0 p-0">Não realizado</p>
+                    </div>
+                    <div class="col-3">
+                        <p *ngIf="event.pago" class="m-0 p-0">Efetuado</p>
+                        <p *ngIf="!event.pago" class="m-0 p-0">Pendente</p>
+                    </div>
+                    <div class="col-3">
+                        <p class="m-0 p-0"> R$ {{event.valorConsulta}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-end mt-3">
+            <div style="width: 150px;" class="subtotal">
+                <div class="row justify-content-end">
+                    <div class="col-auto">
+                        Subtotal:
+                    </div>
+                    <div class="col-auto">
+                        R$ {{subtotal}}
+                    </div>
+                </div>
+                <mat-divider></mat-divider>
+            </div>
+        </div>
+        <div class="row justify-content-end mt-3">
+            <div style="width: 150px;" class="subtotal">
+                <div class="row justify-content-end">
+                    <div class="col-auto">
+                        Descontos:
+                    </div>
+                    <div class="col-auto">
+                        R$ {{descontos}}
+                    </div>
+                </div>
+                <mat-divider></mat-divider>
+            </div>
+        </div>
+        
+        <div class="total row justify-content-end mt-3">
+            <div class="col-2">
+                Total:
+            </div>
+            <div class="col-auto">
+                R$ {{totalEvents}}
+            </div>
+        </div>
+
+        <div class="row justify-content-between mt-5" *ngIf="userData.endereco">
+            <div class="col-auto mb-5">
+                {{userData.endereco.localidade}} 
+                {{atualDay}} de 
+                {{months[atualMonth]}} de 
+                {{atualYear}}
+            </div>
+            <div class="col-auto mb-2">
+                <h2 class="m-0 p-0">{{userData.nome}} {{userData.sobrenome}}</h2>
+                <p>CRP: {{userData.crp}}</p>
+            </div>
+        </div>
+        <mat-divider></mat-divider>
+
+        <div class="pagamento-seguro mt-5 d-flex p-1">
+            <div class="img me-2">
+                <img width="50px" src="/assets/pagamento-seguro.png" alt="">
+            </div>
+            <div class="description">
+                <h1>Pagamento seguro e rápido com PIX</h1>
+            </div>
+        </div>
+        <div class="options p-1 d-flex">
+            <div class="img me-2">
+                <img class="" width="50px" src="/assets/qr-scan.png" alt="">
+            </div>
+           <div class="description">
+                <h1>Use o pagamento por QR-CODE ou</h1>
+           </div>
+        </div>
+        <div class="options p-1 d-flex">
+            <div class="img me-2">
+                <img class="" width="50px" src="/assets/paste.png" alt="">
+            </div>
+           <div class="description">
+                <h1>Clique no código abaixo para copia-lo</h1>
+           </div>
+        </div>
+    </div>
+    <div class="qrcode-container d-flex">
+        <div class="qrcode-img">
+            <img [src]="pix.imgData" >
+        </div>
+        <div class="copia-cola">
+            <p (click)="updateMessage()" [matTooltip]="message" [cdkCopyToClipboard]="pix.brCode">{{pix.brCode}}</p>
+        </div>
+    </div>
+    
+</section>

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Params } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -28,5 +29,10 @@ export class UserDataService {
 
   updateUser(user: any): Observable<any> {
     return this.http.put(`${environment.api}/user/update-user`, user)
+  }
+
+  gerUserByCrp(params: Params){
+    
+    return this.http.get(`${environment.api}/getUser/${params}`, )
   }
 }
